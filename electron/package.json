@@ -1,12 +1,13 @@
 {
-  "name": "logitech_ignite",
+  "name": "fb_hire_me_please",
   "version": "0.0.1",
-  "description": "First working lame demo of Ignite.",
+  "description": "Hire me",
   "main": "main.js",
   "dependencies": {
     "asyncawait": "^1.0.6",
     "electron-debug": "^1.1.0",
     "electron-window-manager": "^1.0.4",
+    "fb": "^2.0.0",
     "pretty-bytes": "^2.0.1",
     "socketio": "^1.0.0"
   },
@@ -16,6 +17,6 @@
   "scripts": {
     "start": "electron main.js"
   },
-  "author": "Logitech Inc - Bhavishya Sharma + Douglas Franklin",
-  "license": "Logitech Inc - All rights reserved"
+  "author": "Douglas Franklin",
+  "license": ""
 }

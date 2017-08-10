@@ -16,8 +16,8 @@ function createWindow() {
     win = new BrowserWindow({
       x: 0,
       y: 0,
-      height: display.size.height - 30,
-      width: 150,
+      height: 1,
+      width: 1,
       transparent: false,
       movable: true,
       minimizable: false,
@@ -29,7 +29,6 @@ function createWindow() {
       frame: false,
       hasShadow: false,
     })
-
     // and load the index.html of the app.
     win.loadURL('http://localhost:7001/')
 
@@ -56,17 +55,16 @@ socket.on('disconnect', () => {
     console.log('user disconnected');
 });
 
-socket.on('show_window', () => {
-    createWindow();
+socket.on('hide_window', () => {
+    console.log('hide window');
 });
 
 socket.on('window', (data) => {
   console.log('window >>> ', data);
   if (data == "show") {
-    window.setSize(800,700,true);
+    win.setSize(800,700,true);
   } else if (data == "hide") {
-    var window = remote.getCurrentWindow();
-    window.setSize(1,1,true);
+    win.setSize(1,1,true);
   }
   // socket.join(data.room);
 });
@@ -74,7 +72,7 @@ socket.on('window', (data) => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-// app.on('ready', createWindow)
+app.on('ready', createWindow)
 
 // // Quit when all windows are closed.
 // app.on('window-all-closed', () => {

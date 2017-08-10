@@ -10,6 +10,7 @@ import time
 from pykeyboard import PyKeyboard
 from AppKit import *
 import threading
+import collections
 
 port = 8090
 host = "localhost"
@@ -19,6 +20,8 @@ context = {}
 app = Flask("ignite_hw_local")
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, async_mode='threading', ping_timeout=500, ping_interval=100)
+
+
 
 def send_socket_message(channel, message):
     print("send_socket_message()")
@@ -50,17 +53,34 @@ def handle_message(message):
     return content
 from pynput.keyboard import Key, Listener
 
+shortcuts_launch = ['ctrl','shift','d']
+down_keys = []
+
 def on_press(key):
-    print('{0} pressed'.format(
-        key))
-    send_socket_message("show_window","")
+    global down_keys
+    # if hasattr(key, 'char'):
+    #     down_keys.append(str(key.char))
+    if hasattr(key, 'name'):
+        # down_keys.append(str(key.name))
+        if(str(key.name) == "cmd"):
+            send_socket_message("window", "show")
+    # if(collections.Counter(shortcuts_launch) == collections.Counter(down_keys)):
+    #     send_socket_message("show_window","")
+    # else:
+    #     print(down_keys)
 
 def on_release(key):
-    print('{0} release'.format(
-        key))
-    if key == Key.esc:
-        # Stop listener
-        return False
+    global down_keys
+    # if hasattr(key, 'char'):
+    #     if(str(key.char) in down_keys):
+    #         down_keys.remove(str(key.char))
+    if hasattr(key, 'name'):
+        if(str(key.name) == "cmd"):
+            send_socket_message("window", "hide")
+    # if(collections.Counter(shortcuts_launch) == collections.Counter(down_keys)):
+    #     print ("Please hide window")
+        
+        down_keys=[]
 
 def thread1():
     with Listener(

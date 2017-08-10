@@ -1,0 +1,21 @@
+{
+  "name": "logitech_ignite",
+  "version": "0.0.1",
+  "description": "First working lame demo of Ignite.",
+  "main": "main.js",
+  "dependencies": {
+    "asyncawait": "^1.0.6",
+    "electron-debug": "^1.1.0",
+    "electron-window-manager": "^1.0.4",
+    "pretty-bytes": "^2.0.1",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "electron": "1.4.16"
+  },
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "author": "Logitech Inc - Bhavishya Sharma + Douglas Franklin",
+  "license": "Logitech Inc - All rights reserved"
+}

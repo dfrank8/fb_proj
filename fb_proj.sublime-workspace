@@ -1,0 +1,1074 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"refer",
+				"referral_link"
+			],
+			[
+				"peak",
+				"peak_width〔variable〕"
+			],
+			[
+				"getVol",
+				"getVolumeAtPeak〔function〕"
+			],
+			[
+				"is",
+				"isSequenceForSum〔function〕"
+			],
+			[
+				"countnu",
+				"countNumOfDigitInRange〔function〕"
+			],
+			[
+				"curr",
+				"current_referral_code"
+			],
+			[
+				"ref",
+				"referred"
+			],
+			[
+				"re",
+				"referral_score"
+			],
+			[
+				"referr",
+				"referral_code〔argument〕"
+			],
+			[
+				"referral",
+				"referral_code"
+			],
+			[
+				"scroll",
+				"scrollTo〔function〕"
+			],
+			[
+				"reer",
+				"referral_code"
+			],
+			[
+				"refe",
+				"referral_code"
+			],
+			[
+				"sort",
+				"sorted_by〔argument〕"
+			],
+			[
+				"avail",
+				"available_tickets〔variable〕"
+			],
+			[
+				"WowAir",
+				"WowAirAccessor"
+			],
+			[
+				"default",
+				"default_airport_code"
+			],
+			[
+				"return",
+				"return_date"
+			],
+			[
+				"def",
+				"default_airport_code"
+			],
+			[
+				"create",
+				"create_token〔function〕"
+			],
+			[
+				"get",
+				"getCurrentUser"
+			],
+			[
+				"json",
+				"jsonify〔module〕"
+			],
+			[
+				"ng-v",
+				"ng-view\tAngularJS"
+			],
+			[
+				"content",
+				"align-content"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
+				"max",
+				"max_length"
+			],
+			[
+				"as",
+				"as_json"
+			],
+			[
+				"left",
+				"left_article.text"
+			],
+			[
+				"algi",
+				"align=〔attribute〕"
+			],
+			[
+				"current",
+				"current_article"
+			],
+			[
+				"curr_artic",
+				"current_article"
+			],
+			[
+				"right",
+				"right_article"
+			],
+			[
+				"art",
+				"art_list〔variable〕"
+			],
+			[
+				"set",
+				"set_trace"
+			],
+			[
+				"q_keywo",
+				"q_keywords"
+			],
+			[
+				"q",
+				"q_index"
+			],
+			[
+				"car",
+				"carousel_click"
+			],
+			[
+				"request",
+				"request.session][\"left"
+			],
+			[
+				"article",
+				"article_chosen"
+			],
+			[
+				"pdb",
+				"pdb.set_trace"
+			],
+			[
+				"add",
+				"addLeftButton"
+			],
+			[
+				"tok",
+				"tokenized"
+			],
+			[
+				"Tw",
+				"TwitterAcc〔variable〕"
+			],
+			[
+				"Acc",
+				"Access_Token_Secret〔argument〕"
+			],
+			[
+				"acc",
+				"access_token_secret"
+			],
+			[
+				"Acce",
+				"Access_Token〔argument〕"
+			],
+			[
+				"acces",
+				"access_token"
+			],
+			[
+				"Consumer",
+				"Consumer_Secret"
+			],
+			[
+				"cons",
+				"consumer_secret"
+			],
+			[
+				"Con",
+				"Consumer_Key〔argument〕"
+			],
+			[
+				"consu",
+				"consumer_key"
+			],
+			[
+				"Twi",
+				"TwitterAccessor〔class〕"
+			],
+			[
+				"Re",
+				"ReturnData〔variable〕"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"solve",
+				"solve_list"
+			],
+			[
+				"pub",
+				"published_date"
+			],
+			[
+				"newBLog",
+				"newBlogFile〔variable〕"
+			],
+			[
+				"good",
+				"goodBlogList〔argument〕"
+			],
+			[
+				"weapn",
+				"weaponryScore"
+			],
+			[
+				"goer",
+				"governmentScore"
+			],
+			[
+				"relig",
+				"religionScore"
+			],
+			[
+				"up",
+				"upperKey〔variable〕"
+			],
+			[
+				"vari",
+				"varianceScores〔variable〕"
+			],
+			[
+				"feates",
+				"featuresAfter〔variable〕"
+			],
+			[
+				"features",
+				"featuresAfter〔variable〕"
+			],
+			[
+				"lower",
+				"lowerKey〔variable〕"
+			],
+			[
+				"feautres",
+				"featuresAfter〔variable〕"
+			],
+			[
+				"featuers",
+				"featuresAfter"
+			],
+			[
+				"var",
+				"varianceScores"
+			],
+			[
+				"feat",
+				"featureCount"
+			],
+			[
+				"ana",
+				"analyzeBlogs〔function〕"
+			],
+			[
+				"apply",
+				"applyWeights"
+			],
+			[
+				"Blog",
+				"BlogObject〔class〕"
+			],
+			[
+				"blogT",
+				"blogTitle〔argument〕"
+			],
+			[
+				"blog",
+				"blogAuthor〔argument〕"
+			],
+			[
+				"an",
+				"analyzeBlog〔function〕"
+			],
+			[
+				"gover",
+				"governmentCount〔variable〕"
+			],
+			[
+				"word",
+				"wordCount〔variable〕"
+			],
+			[
+				"wod",
+				"wordCount〔variable〕"
+			],
+			[
+				"govern",
+				"governmentScore"
+			],
+			[
+				"reli",
+				"religionScore"
+			],
+			[
+				"bad",
+				"bad_features"
+			],
+			[
+				"oututs",
+				"outputsWordsArray"
+			],
+			[
+				"go",
+				"governmentScore"
+			],
+			[
+				"wea",
+				"weaponryScore"
+			],
+			[
+				"names",
+				"namesCount"
+			],
+			[
+				"name",
+				"namesScore"
+			],
+			[
+				"outputs",
+				"outputsWordsArray"
+			],
+			[
+				"weaponry",
+				"weaponryCount〔variable〕"
+			],
+			[
+				"sorted",
+				"sorted_words〔variable〕"
+			],
+			[
+				"goo",
+				"goodBlogList〔variable〕"
+			],
+			[
+				"sorte",
+				"sorted_words〔variable〕"
+			],
+			[
+				"badBl",
+				"badBlogList〔variable〕"
+			],
+			[
+				"t",
+				"tfidf〔function〕"
+			],
+			[
+				"raw",
+				"raw_line〔variable〕"
+			],
+			[
+				"passe",
+				"passedInOutFile"
+			],
+			[
+				"pars",
+				"parsedArrays〔variable〕"
+			],
+			[
+				"par",
+				"parsedArrays〔variable〕"
+			],
+			[
+				"new",
+				"newParticle〔variable〕"
+			],
+			[
+				"setG",
+				"setGhostPositions〔function〕"
+			],
+			[
+				"getPos",
+				"getPositionDistributionForGhost〔function〕"
+			],
+			[
+				"belief",
+				"beliefDistribution"
+			],
+			[
+				"beli",
+				"beliefDistribution〔variable〕"
+			],
+			[
+				"num",
+				"numParticles〔variable〕"
+			],
+			[
+				"noisy",
+				"noisyDistance"
+			],
+			[
+				"particle",
+				"particles"
+			],
+			[
+				"partic",
+				"particlesPerLocation〔variable〕"
+			],
+			[
+				"runLidar",
+				"runLidarFile〔variable〕"
+			],
+			[
+				"ini",
+				"initializeUniformly〔function〕"
+			],
+			[
+				"previous",
+				"previousBelief〔variable〕"
+			],
+			[
+				"dis",
+				"distribution"
+			],
+			[
+				"legal",
+				"legalPositions"
+			],
+			[
+				"livi",
+				"livingGhostPositionDistributions〔variable〕"
+			],
+			[
+				"goto",
+				"goToProb〔variable〕"
+			],
+			[
+				"lii",
+				"livingGhostPositionDistributions〔variable〕"
+			],
+			[
+				"closest",
+				"closestPositions"
+			],
+			[
+				"living",
+				"livingsGhostsPositions"
+			],
+			[
+				"all",
+				"allPossible〔variable〕"
+			],
+			[
+				"pacman",
+				"pacmanPosition〔variable〕"
+			],
+			[
+				"nois",
+				"noisyDistance〔variable〕"
+			],
+			[
+				"hy",
+				"hypoteni"
+			],
+			[
+				"JSON",
+				"JSONFixer"
+			],
+			[
+				"exp",
+				"expHypoteni〔variable〕"
+			],
+			[
+				"hyp",
+				"hypoteni〔variable〕"
+			],
+			[
+				"ratio",
+				"ratioOrHypoteni〔argument〕"
+			],
+			[
+				"distna",
+				"distances〔argument〕"
+			],
+			[
+				"feauter",
+				"featuresVector〔variable〕"
+			],
+			[
+				"fec",
+				"featureVector〔variable〕"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 67.0,
+		"last_filter": "python",
+		"selected_items":
+		[
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"py",
+				"Set Syntax: Python"
+			],
+			[
+				"pep",
+				"User: Python PEP8 Autoformat"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"pep8",
+				"User: Python PEP8 Autoformat"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"angular",
+				"Set Syntax: HTML (Angular.js)"
+			],
+			[
+				"Package Control: Install",
+				"Package Control: Install Package"
+			],
+			[
+				"format",
+				"User: Python PEP8 Autoformat"
+			],
+			[
+				"babe",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"package ontrol: install",
+				"Package Control: Install Package"
+			],
+			[
+				"package ontrol: searc",
+				"Package Control: Discover Packages"
+			],
+			[
+				"text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			],
+			[
+				"txt",
+				"Set Syntax: TeX Math"
+			],
+			[
+				"ver",
+				"Set Syntax: verilog"
+			],
+			[
+				"verilog",
+				"Set Syntax: verilog"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"set syntax: pyt",
+				"Set Syntax: Python"
+			],
+			[
+				"set syntax: C",
+				"Set Syntax: C"
+			],
+			[
+				"pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"markdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			],
+			[
+				"sytnax ",
+				"Set Syntax: Markdown"
+			],
+			[
+				"reindent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"josn",
+				"Set Syntax: JSON"
+			],
+			[
+				"Install Package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 123.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib2,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/ses.py",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/requirements.txt",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/emails/thanks_for_signing_up.html",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/application.py",
+		"/Users/douglasfranklin/Desktop/FBNotes",
+		"/Users/douglasfranklin/Desktop/test.py",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/css/style.css",
+		"/Users/douglasfranklin/Documents/Professional/Facebook/products.txt",
+		"/Users/douglasfranklin/Desktop/waterbottle.py",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/sign-up.html",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/index.html",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/copytoclipboard.js",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/script.js",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/thank-you.html",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/treehoppr-401k.sublime-workspace",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/init.js",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/copy2clipboard.js",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/thankyou.js",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/.gitignore",
+		"/Users/douglasfranklin/Desktop/testSES.py",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/thankyou.html",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/css/app.css",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/requirements.txt",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/templates/index.html",
+		"/Users/douglasfranklin/Projects/treehoppr-archive/treehoppr_1.0.git/app/.gitignore",
+		"/Users/douglasfranklin/Projects/treehoppr-archive/treehoppr_1.0.git/app/eb-flask/.gitignore",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/static/js/init.js",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/static/css/bootstrap.min.css",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/templates/thankyou.html",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/application.py",
+		"/Users/douglasfranklin/Projects/treehoppr-archive/treehoppr_1.0.git/eb-flask/.gitignore",
+		"/Users/douglasfranklin/Projects/TreehopprSignInInfo.txt",
+		"/Users/douglasfranklin/Projects/Treehoppr-401k/iam_policy.json",
+		"/Users/douglasfranklin/Projects/Treehoppr-401k/app_config.json",
+		"/Users/douglasfranklin/Projects/Treehoppr-401k/server.js",
+		"/Users/douglasfranklin/Projects/Treehoppor-401k/eb-flask/flask.py",
+		"/Users/douglasfranklin/Projects/treehoppr-archive/treehoppr-old/project/__init__.py",
+		"/Users/douglasfranklin/Projects/treehoppr-archive/treehoppr/application.py",
+		"/Users/douglasfranklin/Projects/Treehoppr-401k/public/static/js/init.js",
+		"/Users/douglasfranklin/Projects/Treehoppr-401k/views/index.jade",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/config.py",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/config.py",
+		"/Users/douglasfranklin/Projects/flask-aws-tutorial-master/config.py",
+		"/Users/douglasfranklin/Projects/flask-aws-tutorial-master/accesstokens",
+		"/Users/douglasfranklin/Projects/flask-aws-tutorial-master/templates/index.html",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/models.py",
+		"/Users/douglasfranklin/Projects/treehoppr-old/project/config.py",
+		"/Users/douglasfranklin/Projects/treehoppr-old/manage.py",
+		"/Users/douglasfranklin/Projects/treehoppr/config.py",
+		"/Users/douglasfranklin/Downloads/flask-aws-tutorial-master/db_create.py",
+		"/Users/douglasfranklin/Downloads/flask-aws-tutorial-master/application.py",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/templates/pages/placeholder.home.html",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/templates/layouts/main.html",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/templates/forms/register.html",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/app.py",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/config.py",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/templates/layouts/form.html",
+		"/Users/douglasfranklin/Projects/flask-boiler/flask-boilerplate/templates/pages/placeholder.thankyou.html",
+		"/Users/douglasfranklin/Projects/treehoppr/apis/wowair/treehoppr_wowairaccessors.py",
+		"/Users/douglasfranklin/Projects/treehoppr/apis/sabre/treehoppr_sabreaccessor.py",
+		"/Users/douglasfranklin/Projects/treehoppr/apis/api_accessor.py",
+		"/Users/douglasfranklin/Projects/treehoppr/apis/sabre/sabre_test.py",
+		"/Users/douglasfranklin/Projects/treehoppr/requirements.txt",
+		"/Users/douglasfranklin/Desktop/wowairtest.py",
+		"/Users/douglasfranklin/Desktop/treehoppr_wowairaccessors.py",
+		"/Users/douglasfranklin/Desktop/treehoppr_wowairaccessors",
+		"/Users/douglasfranklin/Desktop/sabre_test.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/partials/profile.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/payment.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/__init__.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/config.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/partials/logout.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/app.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/index.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/controllers.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/services.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/partials/home.html",
+		"/Users/douglasfranklin/Desktop/braintree_flask_example-master/app.json",
+		"/Users/douglasfranklin/Desktop/braintree_flask_example-master/test_app.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/hopp.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/profile.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/profile.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/partials/login.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/authenty.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/login.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/partials/register.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/style.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/js/app.js",
+		"/Users/douglasfranklin/Downloads/log_in_form/index.html",
+		"/Users/douglasfranklin/Downloads/flask-angular-auth-master/project/static/partials/login.html",
+		"/Users/douglasfranklin/Downloads/quick-fullscreen 2/index.html",
+		"/Users/douglasfranklin/Downloads/quick-fullscreen/index.html",
+		"/Users/douglasfranklin/Downloads/flask-angular-auth-master/project/static/index.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/models.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/manage.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/templates/index.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/templates/login.html",
+		"/Users/douglasfranklin/Desktop/SentimentAnalysis.py",
+		"/Users/douglasfranklin/Downloads/quick-fullscreen/img/showcase-1.jpg",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/js/angular/controllers/testctrl.js",
+		"/Users/douglasfranklin/Downloads/angular_logged_in/login.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/requests.py",
+		"/Users/douglasfranklin/Downloads/login/index.html",
+		"/Users/douglasfranklin/Downloads/login/scripts/app.js",
+		"/Users/douglasfranklin/Downloads/login/modules/authentication/views/login.html",
+		"/Users/douglasfranklin/Downloads/login/modules/home/views/home.html",
+		"/Users/douglasfranklin/Downloads/login/modules/home/controllers.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/js/angular/home.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/serializers.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/ng-controller-testctrl.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/globals.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/globals.py",
+		"/Users/douglasfranklin/Projects/treehoppr/project/templates/ng-TestCtrl",
+		"/Users/douglasfranklin/Projects/treehoppr/project/templates/splash2.html",
+		"/Users/douglasfranklin/Projects/treehoppr/package.json",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/jsx/splash.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/splash.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/jsx/splash.jsx",
+		"/Users/douglasfranklin/Projects/treehoppr/bower.json",
+		"/Users/douglasfranklin/Projects/treehoppr/project/templates/splash.html",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/jsx/main.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/main.js",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/img/wilderness_compressed.jpg",
+		"/Users/douglasfranklin/Downloads/quick-fullscreen/js/custom.js",
+		"/Users/douglasfranklin/Downloads/quick-fullscreen/css/animate.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/landing-page.css",
+		"/Users/douglasfranklin/Downloads/quick-fullscreen/css/style.css",
+		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/js/main.js"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/douglasfranklin/Projects/treehoppr/project/static/css,/Users/douglasfranklin/Projects/flask-aws-tutorial-master",
+			"/Users/douglasfranklin/Projects/treehoppr/project/static/css",
+			"",
+			"<current file>",
+			"",
+			"/Users/douglasfranklin/Projects/Rubiklock",
+			"",
+			"/Users/douglasfranklin/Documents/Northeastern/Summer 2 2015/ST - Wireless Tech/po",
+			"/Users/douglasfranklin/Downloads/startbootstrap-1-col-portfolio-1.0.3/fonts"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"session['referred_by']",
+			"Sign Up",
+			"sign",
+			"preloader",
+			"url",
+			"preloader",
+			"hero-",
+			"{{",
+			"curr",
+			"session",
+			"referral-code",
+			"referral_code",
+			"md",
+			"please fill out",
+			"valid",
+			"form",
+			"get",
+			"overflow",
+			"show",
+			"map",
+			"static",
+			"unique link",
+			"app",
+			"img",
+			"nice",
+			"signup",
+			"signupf",
+			"img",
+			"href",
+			"data",
+			"self.view",
+			"pdb",
+			"init",
+			"home-welcome",
+			"edit.png",
+			"edit/png",
+			"display",
+			"register",
+			"register-form",
+			"home-top-slide-text",
+			"home",
+			"parallax-overlay",
+			"signin-alt",
+			"signin-at",
+			"section-content",
+			"background",
+			"angular",
+			"ng-viewng",
+			"ng-view",
+			"way",
+			"waypoint",
+			"way",
+			"waypoint",
+			"home",
+			"db = SQLAlchemy(app)",
+			"runserver",
+			"showcase",
+			"icheck",
+			"submit",
+			"click",
+			"ReactDOM.render(\n  React.createElement(ImageComponent, {src: \"http://voices.nationalgeographic.com/files/2013/04/NationalGeographic_1467467.jpg\", width: \"500\"}),\n  document.getElementById('container')\n);",
+			"showcase-1",
+			"start exploring",
+			"facebook",
+			"sign in",
+			"newspaper",
+			"feedparser",
+			"newspaper",
+			"inner_context",
+			"modal",
+			"current_article",
+			"modal",
+			"currdata",
+			"q_index",
+			"renderarticle",
+			"keywords",
+			"currdata",
+			"keywords",
+			"about",
+			"HighlightKeywords",
+			"models",
+			"search",
+			"pdb",
+			"[db",
+			"inner",
+			"carous",
+			"right",
+			"jquery",
+			"left_art",
+			"left",
+			"modal",
+			"mymodal",
+			"comparison",
+			"btn",
+			"myBtn",
+			"mybtn",
+			"myBtn",
+			"'",
+			" ",
+			"WY",
+			" ",
+			"navbar-brand",
+			"navbar",
+			"navbar-brand",
+			"image",
+			"time",
+			"timer",
+			"img",
+			"image",
+			"png",
+			"img/portfolio",
+			"img",
+			"adduser",
+			"legs",
+			"'",
+			"n",
+			",",
+			" ,\n",
+			" \n",
+			"0.00 240",
+			"water",
+			"set_trace",
+			"pdb.set",
+			"getXY",
+			"max",
+			"argmax",
+			"help",
+			"helper"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"Celebrant"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 112.0
+	},
+	"pinned_build_system": "",
+	"project": "fb_proj.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 360.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

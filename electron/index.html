@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ignite PFE</title>
+    <script>
+    window.$ = window.jQuery = require('./js/jquery.min.js');
+    </script>
+    <script src="./js/jquery.flipster.min.js"></script>
+    <script src="./js/socket.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <link rel="stylesheet" href="./css/jquery.flipster.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <div class="container-fluid bg-1">
+        <div class="dropdown" id="pref_dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-cog"></span></button>
+            <ul class="dropdown-menu" id="user_preferences">
+                <li class="dropdown-header">General</li>
+                <li class="list-group-item">
+                    Giphy
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Giphy" name="pref_Giphy" type="checkbox" />
+                        <label for="pref_Giphy" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Dango Emoji
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_DangoEmoji" name="pref_DangoEmoji" type="checkbox" />
+                        <label for="pref_DangoEmoji" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Dictionary/Thesaurus/Wikipedia
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_DictionaryThesaurus" name="pref_DictionaryThesaurus" type="checkbox" />
+                        <label for="pref_DictionaryThesaurus" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Dropbox
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Dropbox" name="pref_Dropbox" type="checkbox" />
+                        <label for="pref_Dropbox" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="dropdown-header">Translate</li>
+                <li class="list-group-item" id="list-item-translate">
+                    Enabled
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Translate" name="pref_Translate" type="checkbox" />
+                        <label for="pref_Translate" class="label-success"></label>
+                    </div>
+                    <br>
+                    <br>
+                    <form>
+                        <select id="Translate_From" name="Translate_From">
+                        </select>
+                        &nbsp;&nbsp;to&nbsp;&nbsp;
+                        <select id="Translate_To" name="Translate_To">
+                        </select>
+                    </form>
+                </li>
+                <li class="dropdown-header">Google</li>
+                <li class="list-group-item">
+                    Youtube
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Youtube" name="pref_Youtube" type="checkbox" />
+                        <label for="pref_Youtube" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Calendar
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Calendar" name="pref_Calendar" type="checkbox" />
+                        <label for="pref_Calendar" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Maps
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Maps" name="pref_Maps" type="checkbox" />
+                        <label for="pref_Maps" class="label-success"></label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Drive
+                    <div class="material-switch pull-right">
+                        <input class="pref_checkbox" id="pref_Drive" name="pref_Drive" type="checkbox" />
+                        <label for="pref_Drive" class="label-success"></label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid bg-1 text-center">
+        <form action="" method="post" role="form" class="contactForm">
+            <div contenteditable class="textarea" id="main_ignite_text_box" ondrop="textarea_drop(event, this)">
+                Hello, my name is Doug Franklin. Welcome to Ignite.
+            </div>
+            <br>
+            <button type="button" onmousedown="submit_mouse_down(event)" onmouseup="revert()" id="submit" class="btn btn-default btn-lg">
+                <span class="glyphicon glyphicon-fire"></span></button>
+            <br>
+            <br>
+            <br>
+            <div class="error_area">
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid bg-3 text-center">
+        <div class="row">
+            <div id="returnDataContainer">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

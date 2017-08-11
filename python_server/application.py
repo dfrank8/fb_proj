@@ -10,7 +10,6 @@ application = Flask(__name__, static_url_path='/static')
 
 application.config.from_object('config')
 
-
 @application.route('/')
 def index(unique_code=None):
     return render_template("index.html")

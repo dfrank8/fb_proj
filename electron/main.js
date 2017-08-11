@@ -5,10 +5,45 @@ const url = require('url')
 const io = require('socket.io-client');
 const socket = io('http://localhost:8090/');
 const FB = require('fb');
+const ioHook = require('iohook');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+var comboDict = {
+    29: false,
+    42: false,
+    33: false
+};
+
+ioHook.on("keydown", event => {
+    // console.log(event["keycode"])
+    if(event["keycode"] == 1)
+    {
+        win.setSize(1, 800, true);
+        return;
+    }
+    if (event["keycode"] in comboDict) {
+        comboDict[event["keycode"]] = true;
+    }
+    combo = true;
+    for (var key in comboDict) {
+        // console.log(key)
+        if (comboDict[key] == false) {
+            // console.log(key + " is false")
+            combo = false;
+        }
+    }
+    if (combo) {
+        win.setSize(800, 700, true);
+    }
+});
+
+ioHook.on("keyup", event => {
+    if (event["keycode"] in comboDict) {
+        comboDict[event["keycode"]] = false;
+    }
+});
 
 function createWindow() {
     // Create the browser window.
@@ -16,7 +51,7 @@ function createWindow() {
     win = new BrowserWindow({
         x: 0,
         y: 0,
-        height: 1,
+        height: 800,
         width: 1,
         transparent: false,
         movable: false,
@@ -39,41 +74,19 @@ function createWindow() {
 
 }
 
-socket.on('connect', (socket) => {
-    console.log('a user connected');
-    
-});
-socket.on('disconnect', () => {
-    console.log('user disconnected');
-});
-
-socket.on('hide_window', () => {
-    console.log('hide window');
-});
-
-socket.on('window', (data) => {
-    console.log('window >>> ', data);
-    if (data == "show") {
-        win.setSize(800, 700, true);
-    } else if (data == "hide") {
-        win.setSize(1, 1, true);
-    }
-    // socket.join(data.room);
-});
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     createWindow();
+    ioHook.start();
 });
 // // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
+    app.quit()
+
 })
 
 // app.on('activate', () => {

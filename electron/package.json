@@ -9,8 +9,7 @@
     "electron-window-manager": "^1.0.4",
     "fb": "^2.0.0",
     "iohook": "^0.1.9",
-    "pretty-bytes": "^2.0.1",
-    "socketio": "^1.0.0"
+    "pretty-bytes": "^2.0.1"
   },
   "devDependencies": {
     "electron": "1.4.16"

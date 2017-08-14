@@ -3,7 +3,6 @@ const { app, BrowserWindow } = electron
 const path = require('path')
 const url = require('url')
 const io = require('socket.io-client');
-const socket = io('http://localhost:8090/');
 const FB = require('fb');
 const ioHook = require('iohook');
 
@@ -15,12 +14,14 @@ var comboDict = {
     42: false,
     33: false
 };
+var winHeight = 700;
+var winOpenWidth = 500;
 
 ioHook.on("keydown", event => {
     // console.log(event["keycode"])
-    if(event["keycode"] == 1)
-    {
-        win.setSize(1, 800, true);
+    if (event["keycode"] == 1) {
+        win.setSize(1, winHeight, true);
+        win.loadURL('http://localhost:5000/holding')
         return;
     }
     if (event["keycode"] in comboDict) {
@@ -35,7 +36,9 @@ ioHook.on("keydown", event => {
         }
     }
     if (combo) {
-        win.setSize(800, 700, true);
+        win.loadURL('http://localhost:5000/')
+        win.setSize(winOpenWidth, winHeight, true);
+        win.focus();
     }
 });
 
@@ -51,7 +54,7 @@ function createWindow() {
     win = new BrowserWindow({
         x: 0,
         y: 0,
-        height: 800,
+        height: winHeight,
         width: 1,
         transparent: false,
         movable: false,
@@ -66,7 +69,6 @@ function createWindow() {
     })
     // and load the index.html of the app.
     // Open the DevTools.
-    win.loadURL('http://localhost:5000')
     win.webContents.openDevTools()
     // win.setBounds(bounds[, animate])
     // win.setBounds({ 'x': 0, 'y': 0, 'width': 100, 'height': 100 });
@@ -79,6 +81,9 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     createWindow();
+    win.webContents.session.clearCache(function() {
+        //some callback.
+    });
     ioHook.start();
 });
 // // Quit when all windows are closed.

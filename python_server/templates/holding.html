@@ -12,19 +12,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- BASIC INFO -->
     <title>Peak</title>
-    <meta name="author" content="Kevin Corliss, Doug Franklin">
-    <meta name="keywords" content="responsive, parallax, bootstrap, html5 template, one page, landing page">
-    <meta name="description" content="Treehoppr specializes in travel related benefits for corporations and businesses of all sizes. Our customizable software solutions simplify the travel experience and cater to each individual traveler's needs - through saving, planning, booking and beyond.">
+    <meta name="author" content="Doug Franklin">
     <!-- FAVICONS -->
-    <link rel="icon" href="{{url_for('static', filename='images/favicons/favicon.ico')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS
-		================================= -->
-    <link rel="stylesheet" href="{{ ASSET_URL }}"> 
+        ================================= -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 </head>
 
 <body class="enable-animations enable-preloader">
-
-    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <i class="fa fa-facebook-square fbLogo" style="font-size:400px;"></i>
+    <script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+    </script>
     <script src="{{url_for('static', filename='js/copytoclipboard.js')}}"></script>
 </body>
 

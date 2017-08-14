@@ -1,14 +1,10 @@
-import os
+from os import path
 
-# Grabs the folder where the script runs.
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-# Enable debug mode.
+# App details
+BASE_DIRECTORY = path.abspath(path.dirname(__file__))
 DEBUG = True
+SECRET_KEY = 'keep_it_like_a_secret'
 
-# Secret key for session management. You can generate random strings here:
-# http://clsc.net/tools-old/random-string-generator.php
-SECRET_KEY = "lkasdfkjlasd0f98qaljsd0f98"
-
-# Connect to the database
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
+# Database details
+SQLALCHEMY_DATABASE_URI = '{0}{1}'.format('sqlite:///',
+                                          path.join(BASE_DIRECTORY, 'app.db'))

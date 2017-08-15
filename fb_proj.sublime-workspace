@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"combo",
+				"comboDict〔variable〕"
+			],
+			[
+				"Socket",
+				"SocketServer〔class〕"
+			],
+			[
+				"release",
+				"released_callback"
+			],
+			[
+				"pressed",
+				"pressed_callback"
+			],
+			[
 				"refer",
 				"referral_link"
 			],
@@ -498,22 +514,6 @@
 			[
 				"hyp",
 				"hypoteni〔variable〕"
-			],
-			[
-				"ratio",
-				"ratioOrHypoteni〔argument〕"
-			],
-			[
-				"distna",
-				"distances〔argument〕"
-			],
-			[
-				"feauter",
-				"featuresVector〔variable〕"
-			],
-			[
-				"fec",
-				"featureVector〔variable〕"
 			]
 		]
 	},
@@ -527,10 +527,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 67.0,
-		"last_filter": "python",
+		"height": 392.0,
+		"last_filter": "css",
 		"selected_items":
 		[
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"pep",
+				"User: Python PEP8 Autoformat"
+			],
 			[
 				"python",
 				"Set Syntax: Python"
@@ -538,10 +546,6 @@
 			[
 				"py",
 				"Set Syntax: Python"
-			],
-			[
-				"pep",
-				"User: Python PEP8 Autoformat"
 			],
 			[
 				"java",
@@ -672,9 +676,39 @@
 	},
 	"expanded_folders":
 	[
+		"/Users/douglasfranklin/Projects/fb_proj",
+		"/Users/douglasfranklin/Projects/fb_proj/electron/css",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/static",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/static/css",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/templates"
 	],
 	"file_history":
 	[
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/requirements.txt",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/run.py",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/__init__.py",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/views.py",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/templates/base.html",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/app/models.py",
+		"/Users/douglasfranklin/Projects/fb_proj/electron/main.js",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/application.py",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/templates/holding.html",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/templates/index.html",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/templates/peak.html",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/static/css/style.css",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/static/css/holdingPage.css",
+		"/Users/douglasfranklin/Projects/fb_proj/electron/package.json",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/templates/holdingPage.css",
+		"/Users/douglasfranklin/Projects/fb_proj/python_server/static/css/holding_page.css",
+		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/index.html",
+		"/Users/douglasfranklin/Projects/fb_proj/electron/js/keypress.js",
+		"/Users/douglasfranklin/Downloads/ignite-master 2/vision/react/src/home/Home.jsx",
+		"/Users/douglasfranklin/Downloads/ignite-master 2/vision/react/src/home/Tab.jsx",
+		"/Users/douglasfranklin/Downloads/ignite-master 2/vision/react/src/app.jsx",
+		"/Users/douglasfranklin/Projects/fb_proj/python_sockets/socket_server.py",
+		"/Users/douglasfranklin/Projects/fb_proj/python_sockets/my_pyinput.py",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/ses.py",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/requirements.txt",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/emails/thanks_for_signing_up.html",
@@ -685,7 +719,6 @@
 		"/Users/douglasfranklin/Documents/Professional/Facebook/products.txt",
 		"/Users/douglasfranklin/Desktop/waterbottle.py",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/sign-up.html",
-		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/index.html",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/copytoclipboard.js",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/static/js/script.js",
 		"/Users/douglasfranklin/Projects/treehoppr_1.0/app/eb-flask/templates/thank-you.html",
@@ -780,33 +813,11 @@
 		"/Users/douglasfranklin/Downloads/login/index.html",
 		"/Users/douglasfranklin/Downloads/login/scripts/app.js",
 		"/Users/douglasfranklin/Downloads/login/modules/authentication/views/login.html",
-		"/Users/douglasfranklin/Downloads/login/modules/home/views/home.html",
-		"/Users/douglasfranklin/Downloads/login/modules/home/controllers.js",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/js/angular/home.js",
-		"/Users/douglasfranklin/Projects/treehoppr/project/serializers.py",
-		"/Users/douglasfranklin/Projects/treehoppr/project/ng-controller-testctrl.js",
-		"/Users/douglasfranklin/Projects/treehoppr/project/globals.py",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/globals.py",
-		"/Users/douglasfranklin/Projects/treehoppr/project/templates/ng-TestCtrl",
-		"/Users/douglasfranklin/Projects/treehoppr/project/templates/splash2.html",
-		"/Users/douglasfranklin/Projects/treehoppr/package.json",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/jsx/splash.js",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/splash.css",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/jsx/splash.jsx",
-		"/Users/douglasfranklin/Projects/treehoppr/bower.json",
-		"/Users/douglasfranklin/Projects/treehoppr/project/templates/splash.html",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/jsx/main.js",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/main.js",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/img/wilderness_compressed.jpg",
-		"/Users/douglasfranklin/Downloads/quick-fullscreen/js/custom.js",
-		"/Users/douglasfranklin/Downloads/quick-fullscreen/css/animate.css",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/css/landing-page.css",
-		"/Users/douglasfranklin/Downloads/quick-fullscreen/css/style.css",
-		"/Users/douglasfranklin/Projects/treehoppr/project/static/scripts/js/main.js"
+		"/Users/douglasfranklin/Downloads/login/modules/home/views/home.html"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -829,6 +840,13 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"logged in",
+			"logout",
+			"learn more",
+			"data",
+			"close",
+			"keydown",
+			"key",
 			"session['referred_by']",
 			"Sign Up",
 			"sign",
@@ -949,14 +967,7 @@
 			" ,\n",
 			" \n",
 			"0.00 240",
-			"water",
-			"set_trace",
-			"pdb.set",
-			"getXY",
-			"max",
-			"argmax",
-			"help",
-			"helper"
+			"water"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1042,12 +1053,12 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"last_filter": "",
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"select_symbol":
 	{

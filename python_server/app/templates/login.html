@@ -1,0 +1,26 @@
+{% extends "login_base.html" %}
+{% block content %}
+<div class="center">
+    <div class="hero-content">
+        <div class="hero-content-inner">
+            <div class="row">
+                <div class="col">
+                    <div class="hero-heading text-center" data-animation="fadeIn">
+                        <h1 class="hero-title">Peak</h1>
+                        <p class="hero-tagline">Run your Facebook Page with 5x the speed.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" align="center">
+                    <p class="hero-buttons text-center">
+                        <div class="fb-login-button" data-size='xlarge' data-scope="public_profile, publish_pages, publish_actions, manage_pages, read_page_mailboxes">
+                            Sign in
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

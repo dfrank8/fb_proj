@@ -1,5 +1,5 @@
 from facebook import get_user_from_cookie, GraphAPI
-from flask import g, render_template, redirect, request, session, url_for
+from flask import g, jsonify, render_template, redirect, request, session, url_for
 from flask_compress import Compress
 from flask_assets import Environment, Bundle
 from app import app, db
@@ -31,22 +31,38 @@ assets.register('js_all', js_bundle)
 assets.register('css_all', css_bundle)
 # Facebook app details
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
     # If a user was set in the get_current_user function before the request,
     # the user is logged in.
-    # pdb.set_trace()
-    # if g.user:
-    #     if('page_accesor' not in session.keys()):
-    #         # Serve this page for the user to select what page they want to interact with.
-    #         return render_template('choose_page.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user)
-    #     session['page_accessor'] = get_page_access_token(GraphAPI(access_token=g.user['access_token'], version='2.9'))
-    #     status = page_accessor.put_object(parent_object="1801207079907523",connection_name="feed",message=msg)
-    #     return render_template('index.html', app_id=FB_APP_ID,
-    #                            app_name=FB_APP_NAME, user=g.user)
+    if request.method == 'POST':
+        if g.user:  
+            # this means the app-choosing is happening.
+            if(len(request.form)>0):
+                page_id = request.form.get('page-id')
+                # session['page_graph'] = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))
+                # set the token and wait for the re-route
+                session['page_access_token'] = page_id
+                return jsonify({'success':True})
+        return jsonify({'success': False})
+    else:
+        if g.user:
+            gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.9')
+            if('page_access_token' not in session.keys()):
+                # Serve this page for the user to select what page they want to interact with.
+                resp = gen_graph.get_object('me/accounts')
+                page_options = []
+                for owned_page in resp['data']:
+                    page_options.append({
+                        'name':owned_page['name'],
+                        'id':owned_page['id']
+                     })
+                return render_template('choose_page.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user, page_options=page_options)
+            
+            # status = page_accessor.put_object(parent_object="1801207079907523",connection_name="feed",message=msg)
+            return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user)
     # Otherwise, a user is not logged in.
     return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME)
-
 
 @app.route('/logout')
 def logout():
@@ -60,20 +76,24 @@ def logout():
     return redirect(url_for('index'))
 
 
-def get_page_access_token(graph):
-    # Get page token to post as the page. You can skip 
-    # the following if you want to post as yourself. 
-    resp = graph.get_object('me/accounts')
-    page_access_token = None
-    # pdb.set_trace()
-    for page in resp['data']:
-        if page['id'] == "1801207079907523":
-            page_access_token = page['access_token']
-            graph = GraphAPI(page_access_token)
-            return graph
+# def get_page_graph(graph):
+#     # Get page token to post as the page. You can skip 
+#     # the following if you want to post as yourself. 
+#     resp = graph.get_object('me/accounts')
+#     page_access_token = None
+#     # pdb.set_trace()
+#     for page in resp['data']:
+#         if page['id'] == "1801207079907523":
+#             page_access_token = page['access_token']
+#             graph = GraphAPI(page_access_token)
+#             return graph
   # You can also skip the above if you get a page token:
   # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
   # and make that long-lived token as in Step 3
+
+# @app.route('/peak')
+# def peak():
+#     return render_template
 
 @app.before_request
 def get_current_user():

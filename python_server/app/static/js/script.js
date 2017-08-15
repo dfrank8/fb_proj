@@ -83,7 +83,7 @@
 		 * IE9 Placeholder
 		 * =======================================
 		 */
-		$( '#form-sign-up' ).on( 'submit', function() {
+		$( '#form-choose-app' ).on( 'submit', function() {
 			var form = $( this );
 			$.ajax({
                 type: 'POST',
@@ -91,25 +91,14 @@
                 url: form.attr('action'),
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 success: function(response) {
-                    window.location = "/thank-you";
-                },
-                error: function(xhr) {
-					alert('failed')
-                }
-            });
-            return false;
-		});
-
-		$( '#form-send-message' ).on( 'submit', function() {
-			var form = $( this );
-			$.ajax({
-                type: 'POST',
-                data: form.serialize(), //username and password
-                url: form.attr('action'),
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                success: function(response) {
-                    form.trigger("reset");
-                    $( '#form-container' ).html("<p align='center'>Thanks!</p>")
+                	if(response['success'] == true)
+                	{
+                		window.location = window.location;
+                	}
+                	else
+                	{
+                		alert('Something broke. Let us pray this is not mid-interview!');
+                	}
                 },
                 error: function(xhr) {
 					alert('failed')

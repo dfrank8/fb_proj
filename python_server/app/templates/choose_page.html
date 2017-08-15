@@ -1,10 +1,21 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "login_base.html" %} {% block content %}
 <div class="center">
-    <h3>Python Facebook SDK</h3>
-    <h4>Flask example</h4>
-    <div class="fb-login-button" data-size='xlarge' data-scope="public_profile, publish_pages, publish_actions, manage_pages, read_page_mailboxes">
-        Sign in
-    </div>
+    {% if page_options %}
+    <form name="hero" action="/" method="post" id="form-choose-app" class="form" role="form">
+        <div class="form-group">
+            <label for="name">Please choose which page to Peak at.</label>
+            <select name="page-id" class="form-control" type="text" id="form-page-name" class="form-control" required="true">
+                {% for page in page_options %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group form-group-submit">
+            <button class="btn btn-primary btn-lg btn-block" data-loading-text="Action Button">Go!</button>
+        </div>
+    </form>
+    {% else %}
+    <p>You have no pages! Go make one.</p>
+    {% endif %}
 </div>
 {% endblock %}

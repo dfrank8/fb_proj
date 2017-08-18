@@ -24,9 +24,11 @@
         window.fbAsyncInit = function() {
             FB.init({
                 appId: '{{ app_id }}',
+                channelUrl : "{{url_for('static', filename='channel.html')}}",
                 status: true,
                 cookie: true,
                 xfbml: true,
+                oauth: true,
                 version: 'v2.10'
             });
 
@@ -80,6 +82,12 @@
             {% block content %} {% endblock %}
         </div>
 </body>
+<script>
+if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}
+</script>
 <script src="{{url_for('static', filename='js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/respimage.min.js')}}"></script>

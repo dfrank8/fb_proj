@@ -46,7 +46,9 @@ def index():
                 return jsonify({'success':True})
         return jsonify({'success': False})
     else:
+        print("not post")
         if g.user:
+            print("have user")
             gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.9')
             if('page_access_token' not in session.keys()):
                 # Serve this page for the user to select what page they want to interact with.
@@ -62,6 +64,7 @@ def index():
             # status = page_accessor.put_object(parent_object="1801207079907523",connection_name="feed",message=msg)
             return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user)
     # Otherwise, a user is not logged in.
+    print("going to the login page")
     return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME)
 
 @app.route('/logout')
@@ -72,6 +75,8 @@ def logout():
     session.  Note: this does not log the user out of Facebook - this is done
     by the JavaScript SDK.
     """
+    print("logout")
+    g.user = None
     session.pop('user', None)
     return redirect(url_for('index'))
 
@@ -110,15 +115,17 @@ def get_current_user():
 
     # Set the user in the session dictionary as a global g.user and bail out
     # of this function early.
-
+    # pdb.set_trace()
     if session.get('user'):
         g.user = session.get('user')
         return
     # pdb.set_trace()  
+    if(request.cookies  == {}):
+        print("no cookies")
     # Attempt to get the short term access token for the current user.
     result = get_user_from_cookie(cookies=request.cookies, app_id=FB_APP_ID,
                                   app_secret=FB_APP_SECRET)
-
+    # pdb.set_trace()
     # If there is no result, we assume the user is not logged in.
     if result:
         # Check to see if this user is already in our database.

@@ -20,30 +20,33 @@
 
 <body class="enable-animations enable-preloader">
     <div id="document" class="document">
-        <script type="text/javascript">
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '{{ app_id }}',
-                status: true,
-                cookie: true,
-                xfbml: true,
-                version: 'v2.10'
-            });
-
-            FB.Event.subscribe('auth.login', function(response) {
-                window.location = window.location;
-            });
-        };
-
-        // Load the SDK Asynchronously
+        <div id="fb-root"></div>
+        <script>
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s);
             js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1462100957178030";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '{{ app_id }}',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v2.10',
+                cookie: true,
+            });
+
+            FB.Event.subscribe('auth.login', function(response) {
+                console.log('auth.login');
+                window.location = window.location;
+            });
+        };
+        
         </script>
         <header id="header" class="header-section section section-dark navbar navbar-fixed-top">
             <div class="container-fluid">
@@ -61,6 +64,12 @@
         </div>
     </div>
 </body>
+<script type="text/javascript">
+if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}
+</script>
 <script src="{{url_for('static', filename='js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/respimage.min.js')}}"></script>

@@ -1,9 +1,7 @@
 const electron = require('electron')
-const { app, BrowserWindow } = electron
-const path = require('path')
-const url = require('url')
-const io = require('socket.io-client');
-const FB = require('fb');
+const { app, BrowserWindow, session } = electron
+const path = require('path');
+const url = require('url');
 const ioHook = require('iohook');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -21,7 +19,6 @@ ioHook.on("keydown", event => {
     // console.log(event["keycode"])
     if (event["keycode"] == 1) {
         win.setSize(1, winHeight, true);
-        win.loadURL('http://localhost:5000/holding')
         return;
     }
     if (event["keycode"] in comboDict) {
@@ -36,7 +33,14 @@ ioHook.on("keydown", event => {
         }
     }
     if (combo) {
-        win.loadURL('http://localhost:5000/')
+        const cookie = { url: 'http://www.facebook.com', name: 'dummy_name', value: 'dummy' }
+        session.defaultSession.cookies.set(cookie, (error) => {
+            if (error) console.error(error)
+        })
+        win.loadURL('http://0.0.0.0:443')
+        // Query all cookies.
+        const ses = win.webContents.session;
+        console.log(ses.getUserAgent());
         win.setSize(winOpenWidth, winHeight, true);
         win.focus();
     }
@@ -66,10 +70,16 @@ function createWindow() {
         fullscreenable: false,
         frame: false,
         hasShadow: true,
+        webPreferences: {
+            webSecurity: false,
+            plugins: true,
+            nodeIntegration: false
+        }
     })
+
     // and load the index.html of the app.
     // Open the DevTools.
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
     // win.setBounds(bounds[, animate])
     // win.setBounds({ 'x': 0, 'y': 0, 'width': 100, 'height': 100 });
     win.focus();
@@ -81,9 +91,6 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     createWindow();
-    win.webContents.session.clearCache(function() {
-        //some callback.
-    });
     ioHook.start();
 });
 // // Quit when all windows are closed.

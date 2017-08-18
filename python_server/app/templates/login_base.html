@@ -41,12 +41,10 @@
                 cookie: true,
             });
 
-            FB.Event.subscribe('auth.login', function(response) {
-                console.log('auth.login');
+            FB.Event.subscribe('auth.statusChange', function(response) {
                 window.location = window.location;
             });
         };
-        
         </script>
         <header id="header" class="header-section section section-dark navbar navbar-fixed-top">
             <div class="container-fluid">
@@ -54,8 +52,13 @@
                     <!-- RESPONSIVE MENU BUTTON -->
                     <!-- HEADER LOGO -->
                     <a class="navbar-logo navbar-brand" href="#hero">
-                            <img src="{{url_for('static', filename='images/logos/narrowhouse-cartoon-eye.png')}}" srcset="{{url_for('static', filename='images/logos/narrowhouse-cartoon-eye.png')}}" alt="Peak">
-                        </a>
+                    {% if user != None %}
+                        <p class='circle-image' style="background-image: url(https://graph.facebook.com/{{ user['id'] }}/picture?type=small);">
+                        </p>
+                        {% else %}
+                        <img src="{{url_for('static', filename='images/logos/narrowhouse-cartoon-eye.png')}}" srcset="{{url_for('static', filename='images/logos/narrowhouse-cartoon-eye.png')}}" alt="Peak">
+                        {% endif %}
+                    </a>
                 </div>
             </div>
         </header>

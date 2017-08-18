@@ -33,11 +33,9 @@ ioHook.on("keydown", event => {
         }
     }
     if (combo) {
-        const cookie = { url: 'http://www.facebook.com', name: 'dummy_name', value: 'dummy' }
-        session.defaultSession.cookies.set(cookie, (error) => {
-            if (error) console.error(error)
-        })
         win.loadURL('http://0.0.0.0:443')
+        // Remove `beforeunload` listeners
+
         // Query all cookies.
         const ses = win.webContents.session;
         console.log(ses.getUserAgent());
@@ -73,7 +71,6 @@ function createWindow() {
         webPreferences: {
             webSecurity: false,
             plugins: true,
-            nodeIntegration: false
         }
     })
 

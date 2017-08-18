@@ -20,33 +20,6 @@
 
 <body class="enable-animations enable-preloader">
     <div id="document" class="document">
-        <script type="text/javascript">
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '{{ app_id }}',
-                channelUrl : "{{url_for('static', filename='channel.html')}}",
-                status: true,
-                cookie: true,
-                xfbml: true,
-                oauth: true,
-                version: 'v2.10'
-            });
-
-            FB.Event.subscribe('auth.login', function(response) {
-                window.location = window.location;
-            });
-        };
-
-        // Load the SDK Asynchronously
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        </script>
         <header id="header" class="header-section section section-dark navbar navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header navbar-left">
@@ -59,26 +32,26 @@
                     </button>
                     <!-- HEADER LOGO -->
                     <a class="navbar-logo navbar-brand anchor-link" href="#hero">
-                            <img src="{{url_for('static', filename='images/logos/Treehoppr-landscape-logo-no-background.png')}}" srcset="{{url_for('static', filename='images/logos/Treehoppr-landscape-logo-no-background.png')}} 2x" alt="Treehoppr">
-                        </a>
+                        <p class='circle-image' style="background-image: url(https://graph.facebook.com/{{ user['id'] }}/picture?type=small);">
+                        </p>
+                    </a>
                 </div>
                 <nav id="navigation" class="navigation navbar-collapse collapse navbar-right">
                     <!-- NAVIGATION LINKS -->
                     <ul id="header-nav" class="nav navbar-nav">
                         <li><a href="#hero" class="hidden">Top</a></li>
-                        <li><a href="#benefits">The Benefits</a></li>
-                        <li><a href="#about">For Employers</a></li>
-                        <!--                            <li><a href="#how-it-works">How it Works</a></li> -->
+                        <li><a href="#scheduled-posts">Scheduled Posts</a></li>
+                        <li><a href="#publish">Publish Posts</a></li>
                         <li><a href="#video">Learn More ►</a></li>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact-maps">Contact</a></li>
                         <!-- HEADER ACTION BUTTON -->
-                        <li class="header-action-button"><a href="#myModal" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+                        <li class="header-action-button"><a href="/logout" id="logout" class="btn btn-primary">Log out</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
-        <div class="container">
+        <div class="container-fluid">
             {% block content %} {% endblock %}
         </div>
 </body>
@@ -87,6 +60,19 @@ if (typeof module === 'object') {
     window.module = module;
     module = undefined;
 }
+</script>
+<script>
+window.fbAsyncInit = function() {
+        FB.init({
+            appId: '{{ app_id }}',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v2.10',
+            cookie: true,
+        });
+        document.getElementById('logout').onclick = function() {
+            FB.logout(function(response) {});
+        };
 </script>
 <script src="{{url_for('static', filename='js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>

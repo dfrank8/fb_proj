@@ -65,7 +65,7 @@ def index():
             return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user)
     # Otherwise, a user is not logged in.
     print("going to the login page")
-    return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME)
+    return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME, user=g.user)
 
 @app.route('/logout')
 def logout():
@@ -77,21 +77,32 @@ def logout():
     """
     print("logout")
     g.user = None
+    session.pop('page_access_token',None)
     session.pop('user', None)
     return redirect(url_for('index'))
 
+@app.route('/posts/<post_type>', methods=['POST'])
+def handle_submissions(post_type = None):
+    if(post_type == None):
+        return jsonify({'success': False})
+    elif (post_type == "quick-post"):
+        # pdb.set_trace()
+        page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))
+        status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
+        # pdb.set_trace()
 
-# def get_page_graph(graph):
-#     # Get page token to post as the page. You can skip 
-#     # the following if you want to post as yourself. 
-#     resp = graph.get_object('me/accounts')
-#     page_access_token = None
-#     # pdb.set_trace()
-#     for page in resp['data']:
-#         if page['id'] == "1801207079907523":
-#             page_access_token = page['access_token']
-#             graph = GraphAPI(page_access_token)
-#             return graph
+
+def get_page_graph(graph):
+    # Get page token to post as the page. You can skip 
+    # the following if you want to post as yourself. 
+    resp = graph.get_object('me/accounts')
+    page_access_token = None
+    # pdb.set_trace()
+    for page in resp['data']:
+        if page['id'] == session.get('page_access_token'):
+            page_access_token = page['access_token']
+            graph = GraphAPI(page_access_token)
+            return graph
   # You can also skip the above if you get a page token:
   # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
   # and make that long-lived token as in Step 3

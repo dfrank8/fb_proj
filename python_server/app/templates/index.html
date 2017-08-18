@@ -1,16 +1,36 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="center">
-    <p class='circle-image'
-       style="background-image: url(https://graph.facebook.com/{{ user['id'] }}/picture?type=large);
-              margin-left: auto; margin-right: auto;">
-    </p>
-    <h3>Hello, {{ user['name'] }}.</h3>
-    <a href="/logout" id="logout">Log out</a>
-    <script>
-        document.getElementById('logout').onclick = function() {
-            FB.logout(function(response) { });
-        };
-    </script>
-</div>
+{% extends "base.html" %} {% block content %}
+<section id="hero" class="hero-section hero-layout-simple hero-fullscreen section section-dark">
+    <div class="section-background">
+    </div>
+    <div class="container-fluid">
+        <div class="hero-content">
+            <div class="hero-content-inner">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="hero-heading text-center" data-animation="fadeIn">
+                            <h3 class="hero-tagline">Quick Post</h3>
+                            <!--                             <p class="hero-tagline">Next step, create a buzz at your office. Share your referral link with co-workers and earn $50 towards your first trip with us for every co-worker who signs up using it.</p> -->
+                            <form name="quick-post" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form form-ajax-submit" role="form">
+                                <div class="form-validation alert"></div>
+                                <div class="form-group subscription-form-wrapper">
+                                    <span class="subscription-form-input ">
+                                                        <textarea name="message" class="form-control" placeholder="Type your post here." rows="5" required="true" oninvalid="this.setCustomValidity('Please provide a message')" oninput="setCustomValidity('')"></textarea>
+                                                    </span>
+                                    <label for="img-upload" class="custom-file-upload" alt="Upload Image">
+                                        <i class="fa fa-cloud-upload fa-4x" alt="Upload Image"></i>
+                                    </label>
+                                    <input id="img-upload" type="file" name="pic" accept="image/*"/>
+                                    <span class="subscription-form-submit">
+                                                        <button class="btn btn-primary btn-lg" data-loading-text="Action Button">Post!</button>
+                                                    </span>
+                                </div>
+                                <img src="" class="img-preview" style="display:none;" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

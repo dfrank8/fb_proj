@@ -5,6 +5,8 @@ from flask_assets import Environment, Bundle
 from app import app, db
 from models import User
 import pdb
+import sys
+from datetime import datetime
 
 
 FB_APP_ID = '1462100957178030'
@@ -83,13 +85,26 @@ def logout():
 
 @app.route('/posts/<post_type>', methods=['POST'])
 def handle_submissions(post_type = None):
+    # pdb.set_trace()
     if(post_type == None):
-        return jsonify({'success': False})
+        return render_template('submit-status.html', data={"message":"Error"})
     elif (post_type == "quick-post"):
         # pdb.set_trace()
-        page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))
-        status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
-        # pdb.set_trace()
+        try:
+            # pdb.set_trace()
+            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))
+            if(len(request.files) > 0):
+                print("posting an image")
+                status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
+            else:
+                print("posting a status")
+                status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
+        except Exception as e:
+            # pdb.set_trace()
+            print("ERROR: " + str(e))
+            return render_template('submit-status.html', data={"message":str(e)})
+    date = "{:%B %d, %Y}".format(datetime.now())
+    return render_template('submit-status.html', data={"message": "Submitted at: " + date})
 
 
 def get_page_graph(graph):

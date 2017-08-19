@@ -10,22 +10,24 @@
                         <div class="hero-heading text-center" data-animation="fadeIn">
                             <h3 class="hero-tagline">Quick Post</h3>
                             <!--                             <p class="hero-tagline">Next step, create a buzz at your office. Share your referral link with co-workers and earn $50 towards your first trip with us for every co-worker who signs up using it.</p> -->
-                            <form name="quick-post" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form form-ajax-submit" role="form">
+                            <form name="quick-post" enctype="multipart/form-data" encoding="multipart/form-data" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form" role="form" target='result-iframe' onsubmit="clearForm(this);">
                                 <div class="form-validation alert"></div>
                                 <div class="form-group subscription-form-wrapper">
                                     <span class="subscription-form-input ">
-                                                        <textarea name="message" class="form-control" placeholder="Type your post here." rows="5" required="true" oninvalid="this.setCustomValidity('Please provide a message')" oninput="setCustomValidity('')"></textarea>
+                                                        <textarea name="message" class="form-control" placeholder="Type your post here." id="message-box" rows="5" required="true" oninvalid="this.setCustomValidity('Please provide a message')" oninput="setCustomValidity('')"></textarea>
                                                     </span>
                                     <label for="img-upload" class="custom-file-upload" alt="Upload Image">
                                         <i class="fa fa-cloud-upload fa-4x" alt="Upload Image"></i>
                                     </label>
-                                    <input id="img-upload" type="file" name="pic" accept="image/*"/>
+                                    <input class="form-control" id="img-upload" type="file" name="picture" accept="image/*" />
                                     <span class="subscription-form-submit">
-                                                        <button class="btn btn-primary btn-lg" data-loading-text="Action Button">Post!</button>
+                                                        <button class="btn btn-primary btn-lg">Post!</button>
                                                     </span>
                                 </div>
                                 <img src="" class="img-preview" style="display:none;" />
                             </form>
+                            <iframe name='result-iframe' class="hidden-ifra">
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -33,4 +35,12 @@
         </div>
     </div>
 </section>
+<script>
+function clearForm() {
+    var form = arguments[0];
+    var input = $('#message-box');
+    input.val("")
+    $(".img-preview").attr('src', "");
+}
+</script>
 {% endblock %}

@@ -105,28 +105,17 @@
             return false;
         });
 
-        $('#quick-post').on('submit', function() {
-            var form = $(this);
-            // debugger
-            $.ajax({
-                type: 'POST',
-                data: form.serialize(), //username and password
-                url: form.attr('action'),
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                success: function(response) {
-                    if (response['success'] == true) {
-                    	// debugger
-                        window.location = window.location;
-                    } else {
-                        alert('Something broke. Let us pray this is not mid-interview!');
-                    }
-                },
-                error: function(xhr) {
-                    alert('failed')
+        function clearForm() {
+            var form = arguments[0];
+            var inputs = form.getElementsByTagName('input');
+
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == 'text') {
+                    inputs[i].value = '';
                 }
-            });
-            return false;
-        });
+            }
+            $(".img-preview").attr('src', "");
+        }
         /**
          * =======================================
          * Detect Mobile Device
@@ -415,7 +404,7 @@
 
     });
     $("#img-upload").on("change", function(e) {
-        $(".img-preview").fadeIn("fast").attr('src',URL.createObjectURL(event.target.files[0]))
+        $(".img-preview").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]))
     });
 
 })(jQuery);

@@ -105,17 +105,16 @@
             return false;
         });
 
-        function clearForm() {
-            var form = arguments[0];
-            var inputs = form.getElementsByTagName('input');
-
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].type == 'text') {
-                    inputs[i].value = '';
-                }
-            }
+        $("#quick-post").on('submit', function(e) {
+            debugger
+            e.preventDefault(); // don't submit multiple times
+            this.submit(); // use the native submit method of the form element
+            var input = $('#message-box');
+            input.val("");
+            var input = $('#img-upload');
+            input.val("");
             $(".img-preview").attr('src', "");
-        }
+        });
         /**
          * =======================================
          * Detect Mobile Device

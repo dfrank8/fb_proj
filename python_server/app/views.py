@@ -6,7 +6,7 @@ from app import app, db
 from models import User
 import pdb
 import sys
-from datetime import datetime
+import time
 
 
 FB_APP_ID = '1462100957178030'
@@ -86,14 +86,15 @@ def logout():
 @app.route('/posts/<post_type>', methods=['POST'])
 def handle_submissions(post_type = None):
     # pdb.set_trace()
+    print("message=" + request.form.get("message"))
     if(post_type == None):
         return render_template('submit-status.html', data={"message":"Error"})
     elif (post_type == "quick-post"):
         # pdb.set_trace()
         try:
             # pdb.set_trace()
-            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))
-            if(len(request.files) > 0):
+            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))    
+            if(len(request.files['picture'].filename) > 0):
                 print("posting an image")
                 status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
             else:
@@ -103,7 +104,7 @@ def handle_submissions(post_type = None):
             # pdb.set_trace()
             print("ERROR: " + str(e))
             return render_template('submit-status.html', data={"message":str(e)})
-    date = "{:%B %d, %Y}".format(datetime.now())
+    date = time.strftime('%l:%M%p') # ' 1:36PM EST on Oct 18, 2010'
     return render_template('submit-status.html', data={"message": "Submitted at: " + date})
 
 

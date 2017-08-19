@@ -10,7 +10,7 @@
                         <div class="hero-heading text-center" data-animation="fadeIn">
                             <h3 class="hero-tagline">Quick Post</h3>
                             <!--                             <p class="hero-tagline">Next step, create a buzz at your office. Share your referral link with co-workers and earn $50 towards your first trip with us for every co-worker who signs up using it.</p> -->
-                            <form name="quick-post" enctype="multipart/form-data" encoding="multipart/form-data" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form" role="form" target='result-iframe' onsubmit="clearForm(this);">
+                            <form name="quick-post" enctype="multipart/form-data" encoding="multipart/form-data" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form" role="form" target='result-iframe'>
                                 <div class="form-validation alert"></div>
                                 <div class="form-group subscription-form-wrapper">
                                     <span class="subscription-form-input ">
@@ -36,11 +36,6 @@
     </div>
 </section>
 <script>
-function clearForm() {
-    var form = arguments[0];
-    var input = $('#message-box');
-    input.val("")
-    $(".img-preview").attr('src', "");
-}
+
 </script>
 {% endblock %}

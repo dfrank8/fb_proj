@@ -62,7 +62,26 @@ def index():
                         'id':owned_page['id']
                      })
                 return render_template('choose_page.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user, page_options=page_options)
+            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))    
+            # BUILD MAIN INDEX
+            # Recent posts
+            recent_posts = []
+            posts = page_graph.get_connections(session.get('page_access_token'),'posts',limit=5)
+            for post in posts.get('data'):
+                recent_posts.append({
+                    'id':post['id'],
+                    'message':post['message'],
+                    'message_trim':post['message'][0:25],
+                    'like_count': len(page_graph.get_connections(id=post['id'], connection_name='likes')['data']),
+                    'comment_count': len(page_graph.get_connections(id=post['id'], connection_name='comments')['data'])
+                })
             
+            pdb.set_trace()
+            # get recent post's status (comments, likes)
+            ### comments = page_graph.get_connections(id=posts['data'][1]['id'], connection_name='comments')
+            ### likes = page_graph.get_connections(id=posts['data'][1]['id'], connection_name='likes')
+            # unpublished posts
+
             # status = page_accessor.put_object(parent_object="1801207079907523",connection_name="feed",message=msg)
             return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user)
     # Otherwise, a user is not logged in.
@@ -100,6 +119,7 @@ def handle_submissions(post_type = None):
             else:
                 print("posting a status")
                 status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
+            pdb.set_trace()
         except Exception as e:
             # pdb.set_trace()
             print("ERROR: " + str(e))

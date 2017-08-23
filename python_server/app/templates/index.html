@@ -19,23 +19,62 @@
                                     <label for="img-upload" class="custom-file-upload" alt="Upload Image">
                                         <i class="fa fa-cloud-upload fa-4x" alt="Upload Image"></i>
                                     </label>
-                                    <input class="form-control" id="img-upload" type="file" name="picture" accept="image/*" />
+                                    <input class="form-control" id="img-upload" style="opacity: 0;" type="file" name="picture" accept="image/*" />
                                     <span class="subscription-form-submit">
                                                         <button class="btn btn-primary btn-lg">Post!</button>
                                                     </span>
                                 </div>
-                                <img src="" class="img-preview" style="display:none;" />
-                            </form>
-                            <iframe name='result-iframe' class="hidden-ifra">
-                            </iframe>
+                                <br />
+                                <p align="left">Schedule for...</p>
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' name="datetime" class="form-control" />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <button type="button" id="date_clear">Clear Date</button>
                         </div>
+                        <img src="" class="img-preview" style="display:none;" />
+                        </form>
+                        <iframe name='result-iframe' class="hidden-ifra">
+                        </iframe>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </section>
-<script>
-
-</script>
+<section id="about" class="about-section section">
+    <div class="container">
+        <h2 class="section-heading text-center">
+                    Recent Activity
+                </h2>
+        <div class="about-row row">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Message</th>
+                            <th># Comments</th>
+                            <th># Likes</th>
+                        </tr>
+                        {% for post in recent_posts %}
+                        <tr>
+                            <th title="{{ post.message }}">{{ post.message_trim }}</th>
+                            <th>{{ post.comment_count }}</th>
+                            <th>{{ post.like_count }}</th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <select id="num_posts">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

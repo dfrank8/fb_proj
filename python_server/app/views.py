@@ -7,6 +7,7 @@ from models import User
 import pdb
 import sys
 import time
+import datetime
 
 
 FB_APP_ID = '1462100957178030'
@@ -34,7 +35,8 @@ assets.register('css_all', css_bundle)
 # Facebook app details
 
 @app.route('/', methods=['GET','POST'])
-def index():
+@app.route('/<number_of_posts>', methods=['GET'])
+def index(number_of_posts=5):
     # If a user was set in the get_current_user function before the request,
     # the user is logged in.
     if request.method == 'POST':
@@ -42,7 +44,7 @@ def index():
             # this means the app-choosing is happening.
             if(len(request.form)>0):
                 page_id = request.form.get('page-id')
-                # session['page_graph'] = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))
+                # session['page_graph'] = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))
                 # set the token and wait for the re-route
                 session['page_access_token'] = page_id
                 return jsonify({'success':True})
@@ -51,7 +53,7 @@ def index():
         print("not post")
         if g.user:
             print("have user")
-            gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.9')
+            gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.8')
             if('page_access_token' not in session.keys()):
                 # Serve this page for the user to select what page they want to interact with.
                 resp = gen_graph.get_object('me/accounts')
@@ -62,28 +64,33 @@ def index():
                         'id':owned_page['id']
                      })
                 return render_template('choose_page.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user, page_options=page_options)
-            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))    
+            page_graph = get_page_graph(gen_graph)    
             # BUILD MAIN INDEX
             # Recent posts
             recent_posts = []
-            posts = page_graph.get_connections(session.get('page_access_token'),'posts',limit=5)
+            unpublished_posts = []
+            posts = page_graph.get_connections(session.get('page_access_token'),'posts',limit=number_of_posts)
             for post in posts.get('data'):
-                recent_posts.append({
+                try:
+                    recent_posts.append({
                     'id':post['id'],
                     'message':post['message'],
                     'message_trim':post['message'][0:25],
                     'like_count': len(page_graph.get_connections(id=post['id'], connection_name='likes')['data']),
                     'comment_count': len(page_graph.get_connections(id=post['id'], connection_name='comments')['data'])
                 })
+                except:
+                    continue
+
             
-            pdb.set_trace()
+            # pdb.set_trace()
             # get recent post's status (comments, likes)
             ### comments = page_graph.get_connections(id=posts['data'][1]['id'], connection_name='comments')
             ### likes = page_graph.get_connections(id=posts['data'][1]['id'], connection_name='likes')
             # unpublished posts
 
             # status = page_accessor.put_object(parent_object="1801207079907523",connection_name="feed",message=msg)
-            return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user)
+            return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user, recent_posts=recent_posts)
     # Otherwise, a user is not logged in.
     print("going to the login page")
     return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME, user=g.user)
@@ -104,22 +111,29 @@ def logout():
 
 @app.route('/posts/<post_type>', methods=['POST'])
 def handle_submissions(post_type = None):
-    # pdb.set_trace()
-    print("message=" + request.form.get("message"))
     if(post_type == None):
         return render_template('submit-status.html', data={"message":"Error"})
     elif (post_type == "quick-post"):
         # pdb.set_trace()
         try:
             # pdb.set_trace()
-            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))    
+            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))    
+            publish_at = None
+            publish= True
+            # pdb.set_trace()
+            if(request.form.get('datetime') != ''):
+                jt = request.form.get('datetime').split(' ')
+                daily = jt[1].split(':')
+                seconds = int(daily[0]) * 60 * 60
+                seconds += int(daily[1]) * 60
+                publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%Y-%m-%d").timetuple()) + seconds)
+                publish = False
             if(len(request.files['picture'].filename) > 0):
                 print("posting an image")
                 status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
             else:
                 print("posting a status")
-                status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
-            pdb.set_trace()
+                status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
         except Exception as e:
             # pdb.set_trace()
             print("ERROR: " + str(e))
@@ -137,7 +151,7 @@ def get_page_graph(graph):
     for page in resp['data']:
         if page['id'] == session.get('page_access_token'):
             page_access_token = page['access_token']
-            graph = GraphAPI(page_access_token)
+            graph = GraphAPI(access_token=page_access_token, version='2.8')
             return graph
   # You can also skip the above if you get a page token:
   # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
@@ -180,7 +194,7 @@ def get_current_user():
 
         if not user:
             # Not an existing user so get info
-            graph = GraphAPI(result['access_token'])
+            graph = GraphAPI(result['access_token'], version='2.8')
             profile = graph.get_object('me')
             if 'link' not in profile:
                 profile['link'] = ""

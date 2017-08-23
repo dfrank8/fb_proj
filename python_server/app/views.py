@@ -36,10 +36,10 @@ assets.register('css_all', css_bundle)
 @app.route('/', methods=['GET','POST'])
 @app.route('/<number_of_posts>', methods=['GET'])
 def index(number_of_posts=5):
-"""
+    """
     Index is used for the primary login and single-page interactivity.
     See the switches below. 
-"""
+    """
 # If a user was set in the get_current_user function before the request,
 # the user is logged in.
     if request.method == 'POST':

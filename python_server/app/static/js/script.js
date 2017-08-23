@@ -409,7 +409,9 @@
     });
 
     $('#num_posts').on('change', function(e) {
-        window.location = window.location.origin + this.value
+        // debugger
+        var new_loc = String(window.location.origin) + "/" + this.value;
+        window.location = new_loc;
     });
 
     var bindDatePicker = function() {

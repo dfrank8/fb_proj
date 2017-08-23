@@ -11,7 +11,6 @@ import datetime
 
 
 FB_APP_ID = '1462100957178030'
-FB_APP_NAME = 'Interview_Proj'
 FB_APP_SECRET = '52dcf535d81d792d4da51eeac3f11fb3'
 
 Compress(app)
@@ -37,14 +36,17 @@ assets.register('css_all', css_bundle)
 @app.route('/', methods=['GET','POST'])
 @app.route('/<number_of_posts>', methods=['GET'])
 def index(number_of_posts=5):
-    # If a user was set in the get_current_user function before the request,
-    # the user is logged in.
+"""
+    Index is used for the primary login and single-page interactivity.
+    See the switches below. 
+"""
+# If a user was set in the get_current_user function before the request,
+# the user is logged in.
     if request.method == 'POST':
         if g.user:  
             # this means the app-choosing is happening.
             if(len(request.form)>0):
                 page_id = request.form.get('page-id')
-                # session['page_graph'] = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))
                 # set the token and wait for the re-route
                 session['page_access_token'] = page_id
                 return jsonify({'success':True})
@@ -63,7 +65,7 @@ def index(number_of_posts=5):
                         'name':owned_page['name'],
                         'id':owned_page['id']
                      })
-                return render_template('choose_page.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user, page_options=page_options)
+                return render_template('choose_page.html', app_id=FB_APP_ID, app_name=session.get('page_name'), user=g.user, page_options=page_options)
             page_graph = get_page_graph(gen_graph)    
             # BUILD MAIN INDEX
             # Recent posts
@@ -81,19 +83,10 @@ def index(number_of_posts=5):
                 })
                 except:
                     continue
-
-            
-            # pdb.set_trace()
-            # get recent post's status (comments, likes)
-            ### comments = page_graph.get_connections(id=posts['data'][1]['id'], connection_name='comments')
-            ### likes = page_graph.get_connections(id=posts['data'][1]['id'], connection_name='likes')
-            # unpublished posts
-
-            # status = page_accessor.put_object(parent_object="1801207079907523",connection_name="feed",message=msg)
-            return render_template('index.html', app_id=FB_APP_ID, app_name=FB_APP_NAME, user=g.user, recent_posts=recent_posts)
+            return render_template('index.html', app_name=session.get('page_name'), user=g.user, recent_posts=recent_posts)
     # Otherwise, a user is not logged in.
     print("going to the login page")
-    return render_template('login.html', app_id=FB_APP_ID, name=FB_APP_NAME, user=g.user)
+    return render_template('login.html', user=g.user)
 
 @app.route('/logout')
 def logout():
@@ -111,34 +104,33 @@ def logout():
 
 @app.route('/posts/<post_type>', methods=['POST'])
 def handle_submissions(post_type = None):
+    """
+        Handles the submissions of the quick-posting.
+    """
     if(post_type == None):
         return render_template('submit-status.html', data={"message":"Error"})
     elif (post_type == "quick-post"):
-        # pdb.set_trace()
         try:
-            # pdb.set_trace()
             page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))    
             publish_at = None
             publish= True
-            # pdb.set_trace()
             if(request.form.get('datetime') != ''):
                 jt = request.form.get('datetime').split(' ')
                 daily = jt[1].split(':')
-                seconds = int(daily[0]) * 60 * 60
-                seconds += int(daily[1]) * 60
-                publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%Y-%m-%d").timetuple()) + seconds)
+                publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%Y-%m-%d").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
                 publish = False
             if(len(request.files['picture'].filename) > 0):
+                # has a picture
                 print("posting an image")
-                status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
+                status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
             else:
+                # no picture
                 print("posting a status")
                 status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
         except Exception as e:
-            # pdb.set_trace()
             print("ERROR: " + str(e))
             return render_template('submit-status.html', data={"message":str(e)})
-    date = time.strftime('%l:%M%p') # ' 1:36PM EST on Oct 18, 2010'
+    date = time.strftime('%l:%M%p')
     return render_template('submit-status.html', data={"message": "Submitted at: " + date})
 
 
@@ -147,19 +139,12 @@ def get_page_graph(graph):
     # the following if you want to post as yourself. 
     resp = graph.get_object('me/accounts')
     page_access_token = None
-    # pdb.set_trace()
     for page in resp['data']:
         if page['id'] == session.get('page_access_token'):
             page_access_token = page['access_token']
+            session['page_name'] = page.get('name')
             graph = GraphAPI(access_token=page_access_token, version='2.8')
             return graph
-  # You can also skip the above if you get a page token:
-  # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
-  # and make that long-lived token as in Step 3
-
-# @app.route('/peak')
-# def peak():
-#     return render_template
 
 @app.before_request
 def get_current_user():

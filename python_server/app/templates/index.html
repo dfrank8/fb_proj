@@ -8,8 +8,8 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="hero-heading text-center" data-animation="fadeIn">
+                        <h1 class="hero">{{ app_name }}</h1>
                             <h3 class="hero-tagline">Quick Post</h3>
-                            <!--                             <p class="hero-tagline">Next step, create a buzz at your office. Share your referral link with co-workers and earn $50 towards your first trip with us for every co-worker who signs up using it.</p> -->
                             <form name="quick-post" enctype="multipart/form-data" encoding="multipart/form-data" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form" role="form" target='result-iframe'>
                                 <div class="form-validation alert"></div>
                                 <div class="form-group subscription-form-wrapper">
@@ -44,7 +44,7 @@
     </div>
     </div>
 </section>
-<section id="about" class="about-section section">
+<section id="published" class="about-section section">
     <div class="container">
         <h2 class="section-heading text-center">
                     Recent Activity
@@ -73,6 +73,36 @@
                         <option value="50">50</option>
                     </select>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="learnmore" class="about-section section-dark">
+    <div class="container">
+        <br>
+        <h2 class="section-heading text-center">
+                    Learn More
+                </h2>
+        <div class="about-row row">
+            <div class="about-text col-md-6">
+                <ul class="icon-list">
+                    <li>
+                        <h4 class="icon-list-title">Quick peek at the past.</h4>
+                        <p>Track your most recent posts and see how they are doing.</p>
+                    </li>
+                </ul>
+                <ul class="icon-list">
+                    <li>
+                        <h4 class="icon-list-title">View your page stats</h4>
+                        <p>See how the page is doing.</p>
+                    </li>
+                </ul>
+                <ul class="icon-list">
+                    <li>
+                        <h4 class="icon-list-title">Go to your page for further tools.</h4>
+                        <p>When speed isn't of the issue, go there faster.</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

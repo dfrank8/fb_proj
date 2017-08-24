@@ -3,7 +3,7 @@
     {% if page_options %}
     <form name="hero" action="/" method="post" id="form-choose-app" class="form" role="form">
         <div class="form-group">
-            <label for="name">Please choose which page to Peak at.</label>
+            <label for="name">Please choose which page to Peek at.</label>
             <select name="page-id" class="form-control" type="text" id="form-page-name" class="form-control" required="true">
                 {% for page in page_options %}
                 <option value="{{ page.id }}">{{ page.name }}</option>

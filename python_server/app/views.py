@@ -33,51 +33,55 @@ assets.register('js_all', js_bundle)
 assets.register('css_all', css_bundle)
 # Facebook app details
 
-@app.route('/', methods=['GET','POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/<number_of_posts>', methods=['GET'])
 def index(number_of_posts=5):
     """
     Index is used for the primary login and single-page interactivity.
-    See the switches below. 
+    See the switches below.
     """
 # If a user was set in the get_current_user function before the request,
 # the user is logged in.
     if request.method == 'POST':
-        if g.user:  
+        if g.user:
             # this means the app-choosing is happening.
-            if(len(request.form)>0):
+            if(len(request.form) > 0):
                 page_id = request.form.get('page-id')
                 # set the token and wait for the re-route
                 session['page_access_token'] = page_id
-                return jsonify({'success':True})
+                return jsonify({'success': True})
         return jsonify({'success': False})
     else:
         print("not post")
         if g.user:
             print("have user")
-            gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.8')
+            gen_graph = GraphAPI(access_token=g.user[
+                                 'access_token'], version='2.8')
             if('page_access_token' not in session.keys()):
-                # Serve this page for the user to select what page they want to interact with.
+                # Serve this page for the user to select what page they want to
+                # interact with.
                 resp = gen_graph.get_object('me/accounts')
                 page_options = []
                 for owned_page in resp['data']:
                     page_options.append({
-                        'name':owned_page['name'],
-                        'id':owned_page['id']
+                        'name': owned_page['name'],
+                        'id': owned_page['id']
                      })
                 return render_template('choose_page.html', app_id=FB_APP_ID, app_name=session.get('page_name'), user=g.user, page_options=page_options)
-            page_graph = get_page_graph(gen_graph)    
+            page_graph = get_page_graph(gen_graph)
             # BUILD MAIN INDEX
             # Recent posts
             recent_posts = []
             unpublished_posts = []
-            posts = page_graph.get_connections(session.get('page_access_token'),'posts',limit=number_of_posts)
+            posts = page_graph.get_connections(session.get(
+                'page_access_token'), 'posts', limit=number_of_posts)
             for post in posts.get('data'):
                 try:
                     recent_posts.append({
-                    'id':post['id'],
-                    'message':post['message'],
-                    'message_trim':post['message'][0:25],
+                    'id': post['id'],
+                    'message': post['message'],
+                    'message_trim': post['message'][0:25],
                     'like_count': len(page_graph.get_connections(id=post['id'], connection_name='likes')['data']),
                     'comment_count': len(page_graph.get_connections(id=post['id'], connection_name='comments')['data'])
                 })
@@ -87,6 +91,7 @@ def index(number_of_posts=5):
     # Otherwise, a user is not logged in.
     print("going to the login page")
     return render_template('login.html', user=g.user)
+
 
 @app.route('/logout')
 def logout():
@@ -98,40 +103,53 @@ def logout():
     """
     print("logout")
     g.user = None
-    session.pop('page_access_token',None)
+    session.pop('page_access_token', None)
     session.pop('user', None)
     return redirect(url_for('index'))
 
+
 @app.route('/posts/<post_type>', methods=['POST'])
-def handle_submissions(post_type = None):
+def handle_submissions(post_type=None):
     """
         Handles the submissions of the quick-posting.
     """
+    print("handling submission: " + str(post_type))
     if(post_type == None):
-        return render_template('submit-status.html', data={"message":"Error"})
-    elif (post_type == "quick-post"):
+        return render_template('submit-status.html', data={"message": "Error"})
+    else:
         try:
             page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))    
-            publish_at = None
-            publish= True
-            if(request.form.get('datetime') != ''):
-                jt = request.form.get('datetime').split(' ')
-                daily = jt[1].split(':')
-                publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%Y-%m-%d").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
-                publish = False
-            if(len(request.files['picture'].filename) > 0):
-                # has a picture
-                print("posting an image")
-                status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
-            else:
-                # no picture
-                print("posting a status")
-                status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+            if (post_type == "quick-post"):
+                publish_at = None
+                publish= True
+                if(request.form.get('datetime') != ''):
+                    jt = request.form.get('datetime').split(' ')
+                    daily = jt[1].split(':')
+                    publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%Y-%m-%d").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
+                    publish = False
+                if(len(request.files['picture'].filename) > 0):
+                    # has a picture
+                    print("posting an image")
+                    status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                else:
+                    # no picture
+                    print("posting a status")
+                    status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                date = time.strftime('%l:%M%p')
+                return render_template('submit-status.html', data={"message": "Submitted at: " + date})
+            elif (post_type == "get_comments"):
+                print("getting comments")
+                # pdb.set_trace()
+                post_id = request.args.get('id')
+                if(post_id != None):
+                    comments = page_graph.get_connections(id=post_id, connection_name='comments')['data']
+                    if(comments != None):
+                        return render_template('comments.html', comments=comments, post_id=post_id)
+                    # pdb.set_trace()
         except Exception as e:
-            print("ERROR: " + str(e))
-            return render_template('submit-status.html', data={"message":str(e)})
-    date = time.strftime('%l:%M%p')
-    return render_template('submit-status.html', data={"message": "Submitted at: " + date})
+                print("ERROR: " + str(e))
+                return render_template('submit-status.html', data={"message":str(e)})
+    return render_template('submit-status.html', data={"message":"Error"})
 
 
 def get_page_graph(graph):

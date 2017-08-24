@@ -2,7 +2,12 @@
     "use strict";
 
     $(document).on('ready', function() {
-
+        $('.get_comments').on('click', function(e) {
+            $.post('/posts/get_comments?id=' + e.target.id, function(data) {
+                debugger
+                $('#exampleModalLong').html(data);
+            }, 'html');
+        });
         var $window = $(window),
             $body = $('body'),
             $document = $(document),
@@ -177,26 +182,6 @@
             });
         };
 
-        /* =======================================
-         * Video Embed Async Load
-         * =======================================
-         */
-        $body.on('pageStart', function() {
-            $('.video-async').each(function(i, el) {
-                var $el = $(el),
-                    source = $el.data('source'),
-                    video = $el.data('video'),
-                    color = $el.data('color');
-
-                if (source == 'vimeo') {
-                    $el.attr('src', '//player.vimeo.com/video/' + video + (color ? '?color=' + color : ''));
-                } else if (source == 'youtube') {
-                    $el.attr('src', '//www.youtube.com/embed/' + video + '?rel=0');
-                }
-
-            });
-        });
-
         /**
          * =======================================
          * Initiate Stellar JS
@@ -211,18 +196,6 @@
                 horizontalOffset: 0,
             });
         };
-
-        /**
-         * =======================================
-         * Numbers (Counter Up)
-         * =======================================
-         */
-        if ($.fn.counterUp) {
-            $('.counter-up').counterUp({
-                time: 1000,
-            });
-        };
-
         /**
          * =======================================
          * Scroll Spy
@@ -293,33 +266,6 @@
 
             $('html, body').animate({ scrollTop: Math.max(0, $target.offset().top - drew.headerFloatingHeight) }, 1000);
         });
-
-        /**
-         * =======================================
-         * Google Maps
-         * =======================================
-         */
-        if (typeof Maplace == 'function' && $('#gmap')) {
-            new Maplace(gmap_options).Load();
-        };
-
-        /**
-         * =======================================
-         * Countdown
-         * =======================================
-         */
-        if ($.fn.countdown) {
-            $('.countdown').each(function(i, el) {
-                var $el = $(el),
-                    date = $el.data('countdown'),
-                    format = $el.html();
-
-                $el.countdown(date, function(e) {
-                    $(el).html(e.strftime(format));
-                });
-                $el.show();
-            });
-        };
 
         /**
          * =======================================
@@ -413,6 +359,8 @@
         var new_loc = String(window.location.origin) + "/" + this.value;
         window.location = new_loc;
     });
+
+
 
     var bindDatePicker = function() {
         $(".date").datetimepicker({

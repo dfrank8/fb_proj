@@ -1,4 +1,8 @@
 {% extends "base.html" %} {% block content %}
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    
+</div>
 <section id="hero" class="hero-section hero-layout-simple hero-fullscreen section section-dark">
     <div class="section-background">
     </div>
@@ -8,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="hero-heading text-center" data-animation="fadeIn">
-                        <h1 class="hero">{{ app_name }}</h1>
+                            <h1 class="hero">{{ app_name }}</h1>
                             <h3 class="hero-tagline">Quick Post</h3>
                             <form name="quick-post" enctype="multipart/form-data" encoding="multipart/form-data" action="/posts/quick-post" method="post" id="quick-post" class="subscription-form" role="form" target='result-iframe'>
                                 <div class="form-validation alert"></div>
@@ -55,13 +59,16 @@
                     <table class="table table-hover">
                         <tr>
                             <th>Message</th>
-                            <th># Comments</th>
-                            <th># Likes</th>
+                            <th>Comments</th>
+                            <th>Likes</th>
                         </tr>
                         {% for post in recent_posts %}
                         <tr>
                             <th title="{{ post.message }}">{{ post.message_trim }}</th>
-                            <th>{{ post.comment_count }}</th>
+                            <th>{{ post.comment_count }}
+                                    <i class="fa fa-external-link-square get_comments" data-toggle="modal" data-target="#exampleModalLong" id={{ post.id }} aria-hidden="true">
+                                    </i>
+                            </th>
                             <th>{{ post.like_count }}</th>
                         </tr>
                         {% endfor %}

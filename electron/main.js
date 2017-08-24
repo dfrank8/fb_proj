@@ -4,6 +4,7 @@ const path = require('path');
 const url = require('url');
 const ioHook = require('iohook');
 
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
@@ -12,7 +13,7 @@ var comboDict = {
     42: false,
     33: false
 };
-var winHeight = 700;
+var winHeight = 800;
 var winOpenWidth = 500;
 
 ioHook.on("keydown", event => {
@@ -89,13 +90,16 @@ function createWindow() {
 app.on('ready', () => {
     createWindow();
     ioHook.start();
+
 });
 // // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     app.quit()
-
+    webContents.session.clearCache(function() {
+        //some callback.
+    });
 })
 
 // app.on('activate', () => {

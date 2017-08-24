@@ -2863,10 +2863,8 @@ input[type="file"] {
 .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
-    margin: 10px;
+    margin-top: 20px;
     cursor: pointer;
-    margin-top: 45px;
-    margin-left: 20px;
 }
 
 .img-preview {

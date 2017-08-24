@@ -4,9 +4,23 @@
     $(document).on('ready', function() {
         $('.get_comments').on('click', function(e) {
             $.post('/posts/get_comments?id=' + e.target.id, function(data) {
-                debugger
                 $('#exampleModalLong').html(data);
             }, 'html');
+        });
+
+        $('#btnsubmit').on('click', function(e) {
+            // Get the first form with the name
+            // Usually the form name is not repeated
+            // but duplicate names are possible in HTML
+            // Therefore to work around the issue, enforce the correct index
+            $("#quick-post").submit()
+            var input = $('#message-box');
+            input.val("");
+            var input = $('#img-upload');
+            input.val("");
+            $(".img-preview").attr('src', "");
+            $('.date').datepicker('setDate', null);
+            return false; // Prevent page refresh
         });
         var $window = $(window),
             $body = $('body'),
@@ -109,16 +123,16 @@
             return false;
         });
 
-        $("#quick-post").on('submit', function(e) {
-            debugger
-            e.preventDefault(); // don't submit multiple times
-            this.submit(); // use the native submit method of the form element
-            var input = $('#message-box');
-            input.val("");
-            var input = $('#img-upload');
-            input.val("");
-            $(".img-preview").attr('src', "");
-        });
+        // $("#quick-post").on('submit', function(e) {
+        //     debugger
+        //     e.preventDefault(); // don't submit multiple times
+        //     this.form.submit(); // use the native submit method of the form element
+        //     var input = $('#message-box');
+        //     input.val("");
+        //     var input = $('#img-upload');
+        //     input.val("");
+        //     $(".img-preview").attr('src', "");
+        // });
         /**
          * =======================================
          * Detect Mobile Device

@@ -41,8 +41,8 @@ def index(number_of_posts=5):
     Index is used for the primary login and single-page interactivity.
     See the switches below.
     """
-# If a user was set in the get_current_user function before the request,
-# the user is logged in.
+    # If a user was set in the get_current_user function before the request,
+    # the user is logged in.
     if request.method == 'POST':
         if g.user:
             # this means the app-choosing is happening.
@@ -125,27 +125,34 @@ def handle_submissions(post_type=None):
                 if(request.form.get('datetime') != ''):
                     jt = request.form.get('datetime').split(' ')
                     daily = jt[1].split(':')
-                    publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%Y-%m-%d").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
+                    # pdb.set_trace()
+                    publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%d/%m/%Y").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
                     publish = False
                 if(len(request.files['picture'].filename) > 0):
                     # has a picture
                     print("posting an image")
-                    status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                    if not publish:
+                        status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                    else:
+                        status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
                 else:
                     # no picture
                     print("posting a status")
-                    status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                    if not publish:
+                        print("scheduling...")
+                        status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                    else:
+                        print("posting...")
+                        status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
                 date = time.strftime('%l:%M%p')
                 return render_template('submit-status.html', data={"message": "Submitted at: " + date})
             elif (post_type == "get_comments"):
                 print("getting comments")
-                # pdb.set_trace()
                 post_id = request.args.get('id')
                 if(post_id != None):
                     comments = page_graph.get_connections(id=post_id, connection_name='comments')['data']
                     if(comments != None):
                         return render_template('comments.html', comments=comments, post_id=post_id)
-                    # pdb.set_trace()
         except Exception as e:
                 print("ERROR: " + str(e))
                 return render_template('submit-status.html', data={"message":str(e)})

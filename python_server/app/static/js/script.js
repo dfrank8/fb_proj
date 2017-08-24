@@ -19,7 +19,7 @@
             var input = $('#img-upload');
             input.val("");
             $(".img-preview").attr('src', "");
-            $('.date').datepicker('setDate', null);
+            $('.date').data("DateTimePicker").setDate("");
             return false; // Prevent page refresh
         });
         var $window = $(window),
@@ -336,7 +336,7 @@
             };
         });
         $('#date_clear').on('click', function(e) {
-            $('.date').datepicker('setDate', null);
+            $('.date').data("DateTimePicker").setDate("");
         });
 
         /* =======================================

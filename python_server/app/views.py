@@ -118,21 +118,34 @@ def handle_submissions(post_type=None):
         return render_template('submit-status.html', data={"message": "Error"})
     else:
         try:
+            is_draft = False
             page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))    
             if (post_type == "quick-post"):
                 publish_at = None
-                publish= True
-                if(request.form.get('datetime') != ''):
-                    jt = request.form.get('datetime').split(' ')
-                    daily = jt[1].split(':')
-                    # pdb.set_trace()
-                    publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%d/%m/%Y").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
-                    publish = False
+                if( request.form.get('is_draft') == None ):
+                    publish= True
+                    if(request.form.get('datetime') != ''):
+                        jt = request.form.get('datetime').split(' ')
+                        daily = jt[1].split(':')
+                        # pdb.set_trace()
+                        publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%d/%m/%Y").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
+                        publish = False
+                else:
+                    #I have a draft
+                    publish= False
+                    is_draft = True
+                
+                pdb.set_trace()
                 if(len(request.files['picture'].filename) > 0):
                     # has a picture
                     print("posting an image")
+
                     if not publish:
-                        status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                        if not is_draft:
+                            status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                        else:
+                            # draft
+                            status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], published=publish)
                     else:
                         status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
                 else:
@@ -140,7 +153,11 @@ def handle_submissions(post_type=None):
                     print("posting a status")
                     if not publish:
                         print("scheduling...")
-                        status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                        if not is_draft:
+                            status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+                        else:
+                            # draft
+                            status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], published=publish)
                     else:
                         print("posting...")
                         status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])

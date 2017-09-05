@@ -8,10 +8,13 @@ import pdb
 import sys
 import time
 import datetime
+from dynamo_helper import Dynamo_Wrapper
 
 
 FB_APP_ID = '1462100957178030'
 FB_APP_SECRET = '52dcf535d81d792d4da51eeac3f11fb3'
+
+dynamo_drafts = Dynamo_Wrapper(table_name ='drafts', primary_key = 'app_id')
 
 Compress(app)
 assets = Environment(app)
@@ -57,7 +60,7 @@ def index(number_of_posts=5):
         if g.user:
             print("have user")
             gen_graph = GraphAPI(access_token=g.user[
-                                 'access_token'], version='2.8')
+                                 'access_token'], version='2.9')
             if('page_access_token' not in session.keys()):
                 # Serve this page for the user to select what page they want to
                 # interact with.
@@ -108,59 +111,69 @@ def logout():
     return redirect(url_for('index'))
 
 
+def fb_put_object(page_graph, parent_object, is_image, **kwargs):
+    # pdb.set_trace()
+    api_call = None
+    if(is_image):
+        pass
+        api_call = page_graph.put_photo
+    else:
+        # not image
+        pass
+        api_call = page_graph.put_object
+    return api_call(parent_object=parent_object, **kwargs)
+
+    # status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+    # status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
+
+def parse_date_time(jt):
+    jt = jt.split(' ')
+    daily = jt[1].split(':')
+    return int(time.mktime(datetime.datetime.strptime(jt[0], "%d/%m/%Y").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
+
 @app.route('/posts/<post_type>', methods=['POST'])
 def handle_submissions(post_type=None):
     """
         Handles the submissions of the quick-posting.
     """
+    delete_draft("123")
     print("handling submission: " + str(post_type))
     if(post_type == None):
         return render_template('submit-status.html', data={"message": "Error"})
     else:
         try:
             is_draft = False
-            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.8'))    
+            args = {}
+            page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))    
             if (post_type == "quick-post"):
+                # build the args for quick-post
                 publish_at = None
-                if( request.form.get('is_draft') == None ):
-                    publish= True
+                if( request.form.get('is_draft') == None ):                    
                     if(request.form.get('datetime') != ''):
-                        jt = request.form.get('datetime').split(' ')
-                        daily = jt[1].split(':')
-                        # pdb.set_trace()
-                        publish_at = int(time.mktime(datetime.datetime.strptime(jt[0], "%d/%m/%Y").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
-                        publish = False
+                        args['publish_at'] = parse_date_time(request.form.get('datetime'))
+                        args['published'] = False
+                    else:
+                        args['published'] = True
                 else:
                     #I have a draft
-                    publish= False
-                    is_draft = True
-                
-                pdb.set_trace()
+                    args['published'] = False
+
+                is_image = False
+                args['message'] = request.form["message"]
                 if(len(request.files['picture'].filename) > 0):
                     # has a picture
                     print("posting an image")
-
-                    if not publish:
-                        if not is_draft:
-                            status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
-                        else:
-                            # draft
-                            status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"], published=publish)
-                    else:
-                        status = page_graph.put_photo(parent_object=session.get('page_access_token'), image=request.files.get("picture"), message=request.form["message"])
+                    args['image'] = request.files.get("picture")
+                    is_image = True
                 else:
-                    # no picture
-                    print("posting a status")
-                    if not publish:
-                        print("scheduling...")
-                        if not is_draft:
-                            status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
-                        else:
-                            # draft
-                            status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], published=publish)
-                    else:
-                        print("posting...")
-                        status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"])
+                    args['connection_name'] = "feed"
+                
+                status = fb_put_object(page_graph,session.get('page_access_token'),is_image,**args)
+                if not args['published'] and 'id' in status.keys():
+                    # it's a draft, let's break out and do draft stuff. 
+                    handle_draft_submission(str(status.get('id')))
+                    delete_draft("123")
+                # pdb.set_trace()
                 date = time.strftime('%l:%M%p')
                 return render_template('submit-status.html', data={"message": "Submitted at: " + date})
             elif (post_type == "get_comments"):
@@ -175,6 +188,25 @@ def handle_submissions(post_type=None):
                 return render_template('submit-status.html', data={"message":str(e)})
     return render_template('submit-status.html', data={"message":"Error"})
 
+def handle_draft_submission(post_id):
+    # pdb.set_trace()
+    response = dynamo_drafts.query(FB_APP_ID)
+    if(len(response.get('Items')) > 0):
+        # we have a array already! we need to update it
+        dynamo_drafts.update_post_list(FB_APP_ID,post_id)
+    else:
+        item = {
+            'app_id' : FB_APP_ID,
+            'drafts' : [post_id]
+        }     
+        status = dynamo_drafts.addItem(item)
+    pdb.set_trace()
+
+def delete_draft(post_index):
+    post_index = "1801207079907523_1829096577118573"
+    dynamo_drafts.delete_draft(FB_APP_ID, post_index)
+    pdb.set_trace()
+
 
 def get_page_graph(graph):
     # Get page token to post as the page. You can skip 
@@ -185,7 +217,7 @@ def get_page_graph(graph):
         if page['id'] == session.get('page_access_token'):
             page_access_token = page['access_token']
             session['page_name'] = page.get('name')
-            graph = GraphAPI(access_token=page_access_token, version='2.8')
+            graph = GraphAPI(access_token=page_access_token, version='2.9')
             return graph
 
 @app.before_request
@@ -221,7 +253,7 @@ def get_current_user():
 
         if not user:
             # Not an existing user so get info
-            graph = GraphAPI(result['access_token'], version='2.8')
+            graph = GraphAPI(result['access_token'], version='2.9')
             profile = graph.get_object('me')
             if 'link' not in profile:
                 profile['link'] = ""

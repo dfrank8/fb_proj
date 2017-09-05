@@ -24,9 +24,6 @@
 
         $('#btnsubmit').on('click', function(e) {
             // Get the first form with the name
-            // Usually the form name is not repeated
-            // but duplicate names are possible in HTML
-            // Therefore to work around the issue, enforce the correct index
             $("#quick-post").submit()
             var input = $('#message-box');
             input.val("");
@@ -34,6 +31,11 @@
             input.val("");
             $(".img-preview").attr('src', "");
             $('.date').data("DateTimePicker").setDate("");
+            if($('#draft').is(':checked'))
+            {
+                // refresh the page if a draft was submitted
+                window.location = window.location;
+            }
             return false; // Prevent page refresh
         });
         var $window = $(window),

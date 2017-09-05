@@ -90,7 +90,7 @@ def index(number_of_posts=5):
                 })
                 except:
                     continue
-            response = dynamo_drafts.query(FB_APP_ID)
+            response = dynamo_drafts.query(getDynamoDBKey())
             drafts = []
             if(len(response.get('Items')) > 0):
                 for draft_id in response.get('Items')[0].get('drafts'):
@@ -203,7 +203,7 @@ def handle_submissions(post_type=None):
 @app.route('/drafts/delete', methods=['POST'])
 def delete_draft():
     try:
-        dynamo_drafts.delete_draft(FB_APP_ID, int(request.args.get('row')) - 2)
+        dynamo_drafts.delete_draft(getDynamoDBKey(), int(request.args.get('row')) - 2)
     except Exception as e:
         print("ERROR: " + str(e))
         return jsonify({'success': False})
@@ -217,23 +217,26 @@ def post_draft():
         page_graph = get_page_graph(gen_graph)
         # page_graph.publish_draft(request.args.get('id'))
         page_graph.update_object(request.args.get('id'), {'is_published' : True})
-        dynamo_drafts.delete_draft(FB_APP_ID, int(request.args.get('row')) - 2)
+        dynamo_drafts.delete_draft(getDynamoDBKey(), int(request.args.get('row')) - 2)
     except Exception as e:
         print("ERROR: " + str(e))
         return jsonify({'success': False})
     return jsonify({'success': True})
     
+def getDynamoDBKey():
+    return FB_APP_ID + str(session.get('page_name'))
 
 def handle_draft_submission(post_id):
     """When a draft is submitted, this method handles the creation of the dynamo table
     entry, or appends it. This depends on the current state"""
-    response = dynamo_drafts.query(FB_APP_ID)
+    # pdb.set_trace()
+    response = dynamo_drafts.query(getDynamoDBKey())
     if(len(response.get('Items')) > 0):
         # we have a array already! we need to update it
-        dynamo_drafts.update_post_list(FB_APP_ID,post_id)
+        dynamo_drafts.update_post_list(getDynamoDBKey(),post_id)
     else:
         item = {
-            'app_id' : FB_APP_ID,
+            'app_id' : getDynamoDBKey(),
             'drafts' : [post_id]
         }     
         status = dynamo_drafts.addItem(item)

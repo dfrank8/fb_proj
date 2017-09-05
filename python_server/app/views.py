@@ -152,7 +152,6 @@ def handle_submissions(post_type=None):
     """
         Handles the submissions of the quick-posting.
     """
-    delete_draft("123")
     print("handling submission: " + str(post_type))
     if(post_type == None):
         return render_template('submit-status.html', data={"message": "Error"})
@@ -202,6 +201,28 @@ def handle_submissions(post_type=None):
                 return render_template('submit-status.html', data={"message":str(e)})
     return render_template('submit-status.html', data={"message":"Error"})
 
+@app.route('/drafts/delete', methods=['POST'])
+def delete_draft():
+    try:
+        dynamo_drafts.delete_draft(FB_APP_ID, int(request.args.get('row')) - 2)
+    except Exception as e:
+        print("ERROR: " + str(e))
+        return jsonify({'success': False})
+    return jsonify({'success': True})
+
+@app.route('/drafts/post', methods=['POST'])
+def post_draft():
+    try:
+        gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.9')
+        page_graph = get_page_graph(gen_graph)
+        page_graph.publish_draft(request.args.get('id'))
+        dynamo_drafts.delete_draft(FB_APP_ID, int(request.args.get('row')) - 2)
+    except Exception as e:
+        print("ERROR: " + str(e))
+        return jsonify({'success': False})
+    return jsonify({'success': True})
+    
+
 def handle_draft_submission(post_id):
     # pdb.set_trace()
     response = dynamo_drafts.query(FB_APP_ID)
@@ -214,11 +235,6 @@ def handle_draft_submission(post_id):
             'drafts' : [post_id]
         }     
         status = dynamo_drafts.addItem(item)
-    pdb.set_trace()
-
-def delete_draft(post_index):
-    dynamo_drafts.delete_draft(FB_APP_ID, post_index)
-    pdb.set_trace()
 
 
 def get_page_graph(graph):

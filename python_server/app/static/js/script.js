@@ -8,6 +8,20 @@
             }, 'html');
         });
 
+        $('.draft_delete_button').on('click', function(e) {
+            var row = $(this).parent().parent().children().index($(this).parent());
+            $.post('/drafts/delete?id=' + e.target.id + '&row=' + String(row), function(data) {
+                window.location = window.location;
+            }, 'html');
+        });
+
+        $('.draft_post_button').on('click', function(e) {
+            var row = $(this).parent().parent().children().index($(this).parent());
+            $.post('/drafts/post?id=' + e.target.id + '&row=' + String(row), function(data) {
+                window.location = window.location;
+            }, 'html');
+        });
+
         $('#btnsubmit').on('click', function(e) {
             // Get the first form with the name
             // Usually the form name is not repeated

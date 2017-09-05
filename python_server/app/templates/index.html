@@ -30,7 +30,8 @@
                                     </div>
                                 </div>
                                 <br />
-                                <input type="checkbox" name="is_draft" id="draft"><label for="draft"> Save as draft (don't schedule)</label>
+                                <input type="checkbox" name="is_draft" id="draft">
+                                <label for="draft"> Save as draft (don't schedule)</label>
                                 <p align="left">Schedule for...</p>
                                 <div class='input-group date' id='datetimepicker1'>
                                     <input type='text' name="datetime" class="form-control" />
@@ -64,8 +65,7 @@
                             <th>Comments</th>
                             <th>Likes</th>
                         </tr>
-                        {% if recent_posts %}
-                        {% for post in recent_posts %}
+                        {% if recent_posts %} {% for post in recent_posts %}
                         <tr>
                             <th title="{{ post.message }}">{{ post.message_trim }}</th>
                             <th>{{ post.comment_count }}
@@ -74,8 +74,7 @@
                             </th>
                             <th>{{ post.like_count }}</th>
                         </tr>
-                        {% endfor %}
-                        {% else %}
+                        {% endfor %} {% else %}
                         <p>You have no recent posts</p>
                         {% endif %}
                     </table>
@@ -90,38 +89,35 @@
         </div>
     </div>
 </section>
-<section id="drafts" class="about-section section">
+<section id="drafts" class="about-section section-dark">
     <div class="container">
         <h2 class="section-heading text-center">
-                    Recent Activity
+                    Drafts
                 </h2>
         <div class="about-row row">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
+                    {% if drafts %}
                     <table class="table table-hover">
                         <tr>
                             <th>Created At</th>
                             <th>Message</th>
                             <th>Actions</th>
                         </tr>
-                        {% if drafts %}
                         {% for draft in drafts %}
                         <tr>
-                            <th>{{ draft.created_at }}</th>
+                            <th>{{ draft.created_time }}</th>
                             <th>{{ draft.message }}</th>
-                            <th><button id="{{ draft.id }}" class="draft_post_button">Post Now</button><button id="{{ draft.id }}" class="draft_delete_button">Delete</button></th>
+                            <th>
+                                <button id="{{ draft.id }}" class="draft_post_button">Post Now</button>
+                                <button id="{{ draft.id }}" class="draft_delete_button">Delete</button>
+                            </th>
                         </tr>
                         {% endfor %}
-                        {% else %}
-                        <p>You have no drafts</p>
-                        {% endif %}
                     </table>
-                    <select id="num_posts">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
+                    {% else %}
+                    <p align="center">You have no drafts</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

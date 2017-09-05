@@ -73,7 +73,6 @@ def index(number_of_posts=5):
                      })
                 return render_template('choose_page.html', app_id=FB_APP_ID, app_name=session.get('page_name'), user=g.user, page_options=page_options)
             page_graph = get_page_graph(gen_graph)
-            # pdb.set_trace()
             # BUILD MAIN INDEX
             # Recent posts
             recent_posts = []
@@ -129,14 +128,12 @@ def logout():
 
 
 def fb_put_object(page_graph, parent_object, is_image, **kwargs):
-    # pdb.set_trace()
+    """Wrapper method for putting objects when scheduled, containing images, drafted, etc"""
     api_call = None
     if(is_image):
-        pass
         api_call = page_graph.put_photo
     else:
         # not image
-        pass
         api_call = page_graph.put_object
     return api_call(parent_object=parent_object, **kwargs)
 
@@ -144,6 +141,7 @@ def fb_put_object(page_graph, parent_object, is_image, **kwargs):
     # status = page_graph.put_object(parent_object=session.get('page_access_token'),connection_name="feed",message=request.form["message"], scheduled_publish_time=publish_at, published=publish)
 
 def parse_date_time(jt):
+    """Translates from utc to unix"""
     jt = jt.split(' ')
     daily = jt[1].split(':')
     return int(time.mktime(datetime.datetime.strptime(jt[0], "%d/%m/%Y").timetuple()) + int(daily[0]) * 60 * 60 + int(daily[1]) * 60)
@@ -185,7 +183,6 @@ def handle_submissions(post_type=None):
                     args['connection_name'] = "feed"
                 
                 status = fb_put_object(page_graph,session.get('page_access_token'),is_image,**args)
-                pdb.set_trace()
                 if not args['published'] and 'id' in status.keys():
                     # it's a draft, let's break out and do draft stuff. 
                     handle_draft_submission(str(status.get('id')))
@@ -214,6 +211,7 @@ def delete_draft():
 
 @app.route('/drafts/post', methods=['POST'])
 def post_draft():
+    """Takes a draft and interacts with the SDK to publish a draft"""
     try:
         gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.9')
         page_graph = get_page_graph(gen_graph)
@@ -227,7 +225,8 @@ def post_draft():
     
 
 def handle_draft_submission(post_id):
-    # pdb.set_trace()
+    """When a draft is submitted, this method handles the creation of the dynamo table
+    entry, or appends it. This depends on the current state"""
     response = dynamo_drafts.query(FB_APP_ID)
     if(len(response.get('Items')) > 0):
         # we have a array already! we need to update it
@@ -241,8 +240,7 @@ def handle_draft_submission(post_id):
 
 
 def get_page_graph(graph):
-    # Get page token to post as the page. You can skip 
-    # the following if you want to post as yourself. 
+    """Get page token to post as the page. You can skip this if you want to post as yourself. """
     resp = graph.get_object('me/accounts')
     page_access_token = None
     for page in resp['data']:
@@ -267,17 +265,14 @@ def get_current_user():
 
     # Set the user in the session dictionary as a global g.user and bail out
     # of this function early.
-    # pdb.set_trace()
     if session.get('user'):
         g.user = session.get('user')
         return
-    # pdb.set_trace()  
     if(request.cookies  == {}):
         print("no cookies")
     # Attempt to get the short term access token for the current user.
     result = get_user_from_cookie(cookies=request.cookies, app_id=FB_APP_ID,
                                   app_secret=FB_APP_SECRET)
-    # pdb.set_trace()
     # If there is no result, we assume the user is not logged in.
     if result:
         # Check to see if this user is already in our database.

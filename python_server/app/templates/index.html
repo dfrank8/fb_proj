@@ -64,6 +64,7 @@
                             <th>Comments</th>
                             <th>Likes</th>
                         </tr>
+                        {% if recent_posts %}
                         {% for post in recent_posts %}
                         <tr>
                             <th title="{{ post.message }}">{{ post.message_trim }}</th>
@@ -74,6 +75,9 @@
                             <th>{{ post.like_count }}</th>
                         </tr>
                         {% endfor %}
+                        {% else %}
+                        <p>You have no recent posts</p>
+                        {% endif %}
                     </table>
                     <select id="num_posts">
                         <option value="5">5</option>
@@ -96,15 +100,21 @@
                 <div class="col-md-10 col-md-offset-1">
                     <table class="table table-hover">
                         <tr>
+                            <th>Created At</th>
                             <th>Message</th>
                             <th>Actions</th>
                         </tr>
+                        {% if drafts %}
                         {% for draft in drafts %}
                         <tr>
+                            <th>{{ draft.created_at }}</th>
                             <th>{{ draft.message }}</th>
-                            <th><button id="{{ draft.id }}" class="draft_post_button">Post Now</button></th>
+                            <th><button id="{{ draft.id }}" class="draft_post_button">Post Now</button><button id="{{ draft.id }}" class="draft_delete_button">Delete</button></th>
                         </tr>
                         {% endfor %}
+                        {% else %}
+                        <p>You have no drafts</p>
+                        {% endif %}
                     </table>
                     <select id="num_posts">
                         <option value="5">5</option>

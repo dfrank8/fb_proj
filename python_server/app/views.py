@@ -90,7 +90,23 @@ def index(number_of_posts=5):
                 })
                 except:
                     continue
-            return render_template('index.html', app_name=session.get('page_name'), user=g.user, recent_posts=recent_posts)
+            response = dynamo_drafts.query(FB_APP_ID)
+            drafts = []
+            if(len(response.get('Items')) > 0):
+                for draft_id in response.get('Items')[0].get('drafts'):
+                    draft = page_graph.get_object(str(draft_id))
+                    drafts.append(
+                        {
+                            'id' : str(draft.get('id')),
+                            'message' : str(draft.get('message')),
+                            'created_time' : str(draft.get('created_time'))
+                        })
+            kwargs = {}
+            if(len(drafts) > 0):
+                kwargs['drafts'] = drafts
+            if(len(recent_posts) > 0):
+                kwargs['recent_posts'] = recent_posts
+            return render_template('index.html', app_name=session.get('page_name'), user=g.user, **kwargs)
     # Otherwise, a user is not logged in.
     print("going to the login page")
     return render_template('login.html', user=g.user)
@@ -172,8 +188,6 @@ def handle_submissions(post_type=None):
                 if not args['published'] and 'id' in status.keys():
                     # it's a draft, let's break out and do draft stuff. 
                     handle_draft_submission(str(status.get('id')))
-                    delete_draft("123")
-                # pdb.set_trace()
                 date = time.strftime('%l:%M%p')
                 return render_template('submit-status.html', data={"message": "Submitted at: " + date})
             elif (post_type == "get_comments"):
@@ -203,7 +217,6 @@ def handle_draft_submission(post_id):
     pdb.set_trace()
 
 def delete_draft(post_index):
-    post_index = "1801207079907523_1829096577118573"
     dynamo_drafts.delete_draft(FB_APP_ID, post_index)
     pdb.set_trace()
 

@@ -73,6 +73,7 @@ def index(number_of_posts=5):
                      })
                 return render_template('choose_page.html', app_id=FB_APP_ID, app_name=session.get('page_name'), user=g.user, page_options=page_options)
             page_graph = get_page_graph(gen_graph)
+            # pdb.set_trace()
             # BUILD MAIN INDEX
             # Recent posts
             recent_posts = []
@@ -154,7 +155,7 @@ def handle_submissions(post_type=None):
     """
     print("handling submission: " + str(post_type))
     if(post_type == None):
-        return render_template('submit-status.html', data={"message": "Error"})
+        return render_template('submit-status.html', data={"message": "Error", "id" : "0"})
     else:
         try:
             is_draft = False
@@ -184,11 +185,12 @@ def handle_submissions(post_type=None):
                     args['connection_name'] = "feed"
                 
                 status = fb_put_object(page_graph,session.get('page_access_token'),is_image,**args)
+                pdb.set_trace()
                 if not args['published'] and 'id' in status.keys():
                     # it's a draft, let's break out and do draft stuff. 
                     handle_draft_submission(str(status.get('id')))
                 date = time.strftime('%l:%M%p')
-                return render_template('submit-status.html', data={"message": "Submitted at: " + date})
+                return render_template('submit-status.html', data={"message": "Submitted at: " + date, "id" : status.get('id')})
             elif (post_type == "get_comments"):
                 print("getting comments")
                 post_id = request.args.get('id')
@@ -198,8 +200,8 @@ def handle_submissions(post_type=None):
                         return render_template('comments.html', comments=comments, post_id=post_id)
         except Exception as e:
                 print("ERROR: " + str(e))
-                return render_template('submit-status.html', data={"message":str(e)})
-    return render_template('submit-status.html', data={"message":"Error"})
+                return render_template('submit-status.html', data={"message":str(e), "id" : "0"})
+    return render_template('submit-status.html', data={"message":"Error", "id" : "0"})
 
 @app.route('/drafts/delete', methods=['POST'])
 def delete_draft():
@@ -215,7 +217,8 @@ def post_draft():
     try:
         gen_graph = GraphAPI(access_token=g.user['access_token'], version='2.9')
         page_graph = get_page_graph(gen_graph)
-        page_graph.publish_draft(request.args.get('id'))
+        # page_graph.publish_draft(request.args.get('id'))
+        page_graph.update_object(request.args.get('id'), {'is_published' : True})
         dynamo_drafts.delete_draft(FB_APP_ID, int(request.args.get('row')) - 2)
     except Exception as e:
         print("ERROR: " + str(e))

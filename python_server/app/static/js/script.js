@@ -22,6 +22,15 @@
             }, 'html');
         });
 
+        $('.edit-post-button').on('click', function(e) {
+            // debugger
+            var sel = String(e.target.id).split('-')[0]+"-new"
+            var new_message = $('#'+sel).val()
+            $.post('/posts/edit_post?id=' + e.target.id + '&new_message=' + String(new_message), function(data) {
+                debugger
+            }, 'html');
+        });
+
         $('#btnsubmit').on('click', function(e) {
             // Get the first form with the name
             $("#quick-post").submit()

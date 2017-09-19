@@ -73,6 +73,8 @@
                                     </i>
                             </th>
                             <th>{{ post.like_count }}</th>
+                            <th><button id="{{ post.id }}-edit" class="edit-post-button">Edit Post</button></th>
+                            <th><textarea id="{{ post.id }}-new"></textarea></th>
                         </tr>
                         {% endfor %} {% else %}
                         <p>You have no recent posts</p>

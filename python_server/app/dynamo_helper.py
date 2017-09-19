@@ -6,8 +6,8 @@ import os
 import datetime
 
 
-os.environ["AWS_ACCESS_KEY_ID"] = "AKIAI7SV5VXL45RP2D4A"
-os.environ["AWS_SECRET_ACCESS_KEY"] = "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"
+os.environ["AWS_ACCESS_KEY_ID"] = "dont_hack_me"
+os.environ["AWS_SECRET_ACCESS_KEY"] = "dont_hack_me"
 os.environ["AWS_REGION"] = "us-west-1"
 
 class Dynamo_Wrapper:

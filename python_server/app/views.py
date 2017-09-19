@@ -160,6 +160,9 @@ def handle_submissions(post_type=None):
             args = {}
             page_graph = get_page_graph(GraphAPI(access_token=g.user['access_token'], version='2.9'))    
             if (post_type == "quick-post"):
+                # now try and edit a post 1801207079907523_1829800497048181
+                # page_graph.update_object("1801207079907523_1829800497048181", {"message":"added this"})
+                # pdb.set_trace()
                 # build the args for quick-post
                 publish_at = None
                 if( request.form.get('is_draft') == None ):                    
@@ -195,6 +198,19 @@ def handle_submissions(post_type=None):
                     comments = page_graph.get_connections(id=post_id, connection_name='comments')['data']
                     if(comments != None):
                         return render_template('comments.html', comments=comments, post_id=post_id)
+            elif post_type == "edit_post":
+                pdb.set_trace()
+                print("edit post")
+                post_id = str(request.args.get('id').split('-')[0])
+                new_message = str(request.args.get('new_message'))
+                if(post_id != None):
+                    # not post id, this is bad
+                    response = page_graph.update_object(post_id, {"message":new_message})
+                    if(response.get('success')):
+                        return render_template('submit-status.html', data={"message": "Submitted at: " + date, "id" : status.get('id')})
+                else:
+                    pass
+
         except Exception as e:
                 print("ERROR: " + str(e))
                 return render_template('submit-status.html', data={"message":str(e), "id" : "0"})
